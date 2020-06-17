@@ -1,7 +1,10 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from './ColorPalette'
 import styled from 'styled-components';
+
+import PrivateRoute from './components/PrivateRoute';
+import LoginForm from './components/LoginForm';
 
 const MainContainer = styled.div`
   display: flex;
@@ -44,21 +47,26 @@ const Button = styled.button`
 
 function App() {
   return (
+  <Router>
     <MainContainer>
       <MainHeading>
         Wonderlust 2.0
       </MainHeading>
-      <Route exact path="/">
         <MainParagraph>
           All the words
         </MainParagraph>
+    <Switch>
+      <Route exact path="/" >
         <ButtonContainer>
           <Link to='/signup'><Button type={'signup'}>Sign Up</Button></Link>
           <Link to='/login'><Button type={'signup'}>Log In</Button></Link>
         </ButtonContainer>
-
       </Route>
+      {/* <PrivateRoute exact path ="/wunderlist" component ={WunderList}/> */}
+      <Route path="/login" component={LoginForm} />
+     </Switch>
     </MainContainer>
+  </Router>
   );
 }
 
