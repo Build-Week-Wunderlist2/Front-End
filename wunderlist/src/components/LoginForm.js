@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-// import axiosWithAuth from '../utils/axiosWithAuth';
+import axiosWithAuth from '../utils/axiosWithAuth';
 import * as yup from 'yup';
 
 const Form = styled.form`
@@ -43,7 +43,7 @@ const LoginForm = ({type}) => {
     };
 
     const submitChange = (e) => {
-        // e.preventDefault()
+        
         // setIsLoading(true);
         // axiosWithAuth()
         // .post("",formData)
