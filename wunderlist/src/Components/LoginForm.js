@@ -16,7 +16,21 @@ padding: 2.5%;
 width: 40%;
 margin: 0 auto;
 
+    pre {
+        color: ${BurntOrange};
+    }
+
 `;
+
+const ErrorContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 3vh;
+
+`;
+
+// div style={{display: 'flex', flexDirection: 'column', width: '50%', height: '3vh', positionLeft: '50%'}}>
 
 const FormLabel = styled.label`
     display: flex;
@@ -78,19 +92,25 @@ const LoginForm = ({type}) => {
     let history = useHistory();
     return (
         <Form onSubmit={submitChange}>
+            
             <FormLabel htmlFor="email">
-                Email:
+                Email: 
             </FormLabel>
-            <FormInput name='email' onChange={handleChange} value={formData.email} placeholder='Please enter your email'/>
-            {(errors.email.length > 0 ? <p>{errors.email}</p> : undefined)}
+            <ErrorContainer>
+                <FormInput name='email' onChange={handleChange} value={formData.email} placeholder='Please enter your email'/>
+                {(errors.email.length > 0 ? <pre>{errors.email}</pre> : undefined)}
+            </ErrorContainer>
             <FormLabel htmlFor="password">
                 Password:
             </FormLabel>
+            <ErrorContainer>
             <FormInput type='password' name='password' onChange={handleChange} value={formData.password} />
-            {(errors.password.length > 0 ? <p>{errors.password}</p> : undefined)}
+            {(errors.password.length > 0 ? <pre>{errors.password}</pre> : undefined)}
+            </ErrorContainer>
             <button onClick={(type === 'signup' ? history.goBack : undefined)} disabled={disabled}>{(type === 'signup' ? 'Sign Up' : 'Log in')}</button>
         </Form>
     )
 }
 
 export default LoginForm
+

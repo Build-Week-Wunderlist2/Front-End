@@ -47,7 +47,7 @@ function App() {
   return (
     <MainContainer>
       <MainHeading>
-        Wonderlust 2.0
+        Wonderlist 2.0
       </MainHeading>
       <Route exact path="/">
         <MainParagraph>
