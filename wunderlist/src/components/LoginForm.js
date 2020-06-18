@@ -28,8 +28,9 @@ const FormInput = styled.input`
 
 
 const LoginForm = ({type}) => {
-    const [formData, setFormData] = useState(formInitial)
-    const [errors, setErrors] = useState(formInitial)
+    const [formData, setFormData] = useState(formInitial);
+    const [errors, setErrors] = useState(formInitial);
+    const [isLoading, setIsLoading] = useState(false);
 
     const formSchema = yup.object().shape({
         email: yup.string().email('Must be a valid email').required('Email is required'),
@@ -43,15 +44,22 @@ const LoginForm = ({type}) => {
 
     const submitChange = (e) => {
         e.preventDefault()
+        setIsLoading(true);
+        axiosWithAuth()
+        .post("",formData)
+        .then(res=>{
+            localStorage.setItem("token",res.data.payload);
+            setIsLoading(false);
+            history.push("/");
+        });
         formSchema.validate(formData).then({
             
         })
-        .catch({
-
-        })
+        .catch(err=>
+            console.error(err.message));
+        };
         // setFormData(FormInitial)
-    };
-
+    
 
     let history = useHistory();
     return (
