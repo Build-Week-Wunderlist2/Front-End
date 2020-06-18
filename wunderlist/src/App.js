@@ -40,7 +40,6 @@ const Button = styled.button`
   width: 5em;
   font-size: 1.6rem;
   margin: 1%;
-  ${prop => prop.type === 'signup' ? 'axios locations' : 'axios location'}
 `;
 
 function App() {
@@ -51,8 +50,8 @@ function App() {
       </MainHeading>
       <Route exact path="/">
         <ButtonContainer>
-          <Link to='/signup'><Button type={'signup'}>Sign Up</Button></Link>
-          <Link to='/login'><Button type={'signup'}>Log In</Button></Link>
+          <Link to='/signup'><Button>Sign Up</Button></Link>
+          <Link to='/login'><Button>Log In</Button></Link>
         </ButtonContainer>
       </Route>
       <Route path="/signup">
