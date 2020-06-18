@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
+import { Link, Route, Switch } from 'react-router-dom'
 import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from './ColorPalette'
 import styled from 'styled-components';
 

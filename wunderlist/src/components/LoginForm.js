@@ -5,4 +5,4 @@ const LoginForm = (props) => {
     return null
 }
 
-export default LoginForm
+export default LoginForm;
