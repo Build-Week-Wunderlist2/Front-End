@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-// import { axiosWithAuth } from '../utils/axiosWithAuth';
+import React, { useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import styled from 'styled-components'
 import * as yup from 'yup';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const Form = styled.form`
 display: flex;
@@ -44,15 +42,7 @@ const LoginForm = ({type}) => {
     };
 
     const submitChange = (e) => {
-        
-        // setIsLoading(true);
-        // axiosWithAuth()
-        // .post("",formData)
-        // .then(res=>{
-        //     localStorage.setItem("token",res.data.payload);
-        //     setIsLoading(false);
-        //     history.push("/");
-        // });
+        e.preventDefault()
         formSchema.validate(formData).then({
             
         })
