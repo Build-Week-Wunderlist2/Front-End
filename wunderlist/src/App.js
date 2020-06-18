@@ -47,7 +47,6 @@ const Button = styled.button`
 
 function App() {
   return (
-  <Router>
     <MainContainer>
       <MainHeading>
         Wonderlust 2.0
@@ -66,7 +65,6 @@ function App() {
       <Route path="/login" component={LoginForm} />
      </Switch>
     </MainContainer>
-  </Router>
   );
 }
 

@@ -6,7 +6,7 @@ const initialToDo = {
 }
 
 const ToDoForm = ({updateToDoList}) => {
-    const [addToDo, setAddToDo] = useState(initialToDo);;
+    const [addToDo, setAddToDo] = useState(initialToDo);
 
     const saveToDo = e => {
         e.preventDefault();
@@ -17,7 +17,21 @@ const ToDoForm = ({updateToDoList}) => {
             setAddToDo(initialToDo);
         })
         .catch(err=>console.log("error: ", err));
-    }
+    };
+
+    return(
+        <form onSubmit={saveToDo}>
+            <legend>Add To Do</legend>
+            <input onChange={e=>
+                setAddToDo({...addToDo, something: e.target.value
+                })
+            }
+                value={addToDo.something}
+                placeholder='What Needs To Be Done'
+            />
+        </form>
+    )
+
 }
 
 export default ToDoForm; 
