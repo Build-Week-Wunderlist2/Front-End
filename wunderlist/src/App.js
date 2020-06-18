@@ -50,9 +50,6 @@ function App() {
         Wonderlist 2.0
       </MainHeading>
       <Route exact path="/">
-        <MainParagraph>
-          All the words
-        </MainParagraph>
         <ButtonContainer>
           <Link to='/signup'><Button type={'signup'}>Sign Up</Button></Link>
           <Link to='/login'><Button type={'signup'}>Log In</Button></Link>

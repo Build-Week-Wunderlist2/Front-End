@@ -13,11 +13,13 @@ background: ${LightPurple};
 box-shadow: 2px 2px 3px 3px ${DarkPurple};
 border-radius: 2rem;
 padding: 2.5%;
-width: 40%;
+width: 30%;
 margin: 0 auto;
 
     pre {
         color: ${BurntOrange};
+        font-size: 1rem;
+        margin: 1%;
     }
 
 `;
@@ -25,17 +27,21 @@ margin: 0 auto;
 const ErrorContainer = styled.div`
     display: flex;
     flex-direction: column;
-    width: 50%;
+    text-align: center;
+    width: 90%;
     height: 3vh;
+    margin: 1%;
 
 `;
 
 // div style={{display: 'flex', flexDirection: 'column', width: '50%', height: '3vh', positionLeft: '50%'}}>
 
 const FormLabel = styled.label`
+    font-size: 1.3rem;
     display: flex;
     justify-content: space-between;
     margin: 1% 0;
+    text-shadow: 1px 1px gray;
 `;
 
 const formInitial = {
@@ -45,6 +51,19 @@ const formInitial = {
 
 const FormInput = styled.input`
     text-align: center;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    color: ${DarkGold};
+    font-weight: 900;
+    box-shadow: 1px 1px ${LightTan}
+`;
+
+const SubmitButton = styled.button`
+    width: 30%;
+    height: 2em;
+    margin: 2%;
+    border-radius: 10px;
+    font-size: 1.1rem;
 `;
 
 
@@ -60,8 +79,8 @@ const LoginForm = ({type}) => {
     }, [formData])
 
     const formSchema = yup.object().shape({
-        email: yup.string().email('Must be a valid email').required('Email is required'),
-        password: yup.string().min(6).required('A password is required')
+        email: yup.string().required('Email is required').email('Must be a valid email'),
+        password: yup.string().required('A password is required').min(6)
       });
 
 
@@ -94,20 +113,20 @@ const LoginForm = ({type}) => {
         <Form onSubmit={submitChange}>
             
             <FormLabel htmlFor="email">
-                Email: 
+                Email
             </FormLabel>
             <ErrorContainer>
                 <FormInput name='email' onChange={handleChange} value={formData.email} placeholder='Please enter your email'/>
                 {(errors.email.length > 0 ? <pre>{errors.email}</pre> : undefined)}
             </ErrorContainer>
             <FormLabel htmlFor="password">
-                Password:
+                Password
             </FormLabel>
             <ErrorContainer>
             <FormInput type='password' name='password' onChange={handleChange} value={formData.password} />
             {(errors.password.length > 0 ? <pre>{errors.password}</pre> : undefined)}
             </ErrorContainer>
-            <button onClick={(type === 'signup' ? history.goBack : undefined)} disabled={disabled}>{(type === 'signup' ? 'Sign Up' : 'Log in')}</button>
+            <SubmitButton onClick={(type === 'signup' ? history.goBack : undefined)} disabled={disabled}>{(type === 'signup' ? 'Sign Up' : 'Log in')}</SubmitButton>
         </Form>
     )
 }
