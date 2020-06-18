@@ -43,15 +43,15 @@ const LoginForm = ({type}) => {
     };
 
     const submitChange = (e) => {
-        e.preventDefault()
-        setIsLoading(true);
-        axiosWithAuth()
-        .post("",formData)
-        .then(res=>{
-            localStorage.setItem("token",res.data.payload);
-            setIsLoading(false);
-            history.push("/");
-        });
+        // e.preventDefault()
+        // setIsLoading(true);
+        // axiosWithAuth()
+        // .post("",formData)
+        // .then(res=>{
+        //     localStorage.setItem("token",res.data.payload);
+        //     setIsLoading(false);
+        //     history.push("/");
+        // });
         formSchema.validate(formData).then({
             
         })
