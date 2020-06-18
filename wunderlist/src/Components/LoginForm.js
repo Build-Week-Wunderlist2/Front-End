@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
+import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from '../ColorPalette'
 import styled from 'styled-components'
 import * as yup from 'yup';
 
@@ -8,6 +9,12 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+background: ${LightPurple};
+box-shadow: 2px 2px 3px 3px ${DarkPurple};
+border-radius: 2rem;
+padding: 2.5%;
+width: 40%;
+margin: 0 auto;
 
 `;
 
@@ -30,6 +37,13 @@ const FormInput = styled.input`
 const LoginForm = ({type}) => {
     const [formData, setFormData] = useState(formInitial)
     const [errors, setErrors] = useState(formInitial)
+    const [disabled, setDisabled] = useState(true)
+
+    useEffect(() => {
+        formSchema.validate(formData).then(() => {
+            setDisabled(!disabled)
+        })
+    }, [formData])
 
     const formSchema = yup.object().shape({
         email: yup.string().email('Must be a valid email').required('Email is required'),
@@ -37,20 +51,31 @@ const LoginForm = ({type}) => {
       });
 
 
-    const handleChange = (e) => {
+    const handleChange = e => {
+        e.persist()
         setFormData({...formData, [e.target.name]: e.target.value})
+        validateChange(e)
     };
 
+    const validateChange = e => {
+        yup.reach(formSchema, e.target.name).validate((e.target.value))
+          .then(valid => {
+            setErrors({...errors, [e.target.name]: ""});
+          })
+          .catch(err => {
+                setErrors({...errors, [e.target.name]: err.errors[0]});
+                setDisabled(true)
+          });
+          console.log(errors)
+      };
+    
     const submitChange = (e) => {
         e.preventDefault()
-        formSchema.validate(formData).then({
-            
+        formSchema.validate(formData).then(() => {
+            console.log(formData)
         })
-        .catch({
+    }
 
-        })
-        // setFormData(FormInitial)
-    };
 
 
     let history = useHistory();
@@ -60,11 +85,13 @@ const LoginForm = ({type}) => {
                 Email:
             </FormLabel>
             <FormInput name='email' onChange={handleChange} value={formData.email} placeholder='Please enter your email'/>
+            {(errors.email.length > 0 ? <p>{errors.email}</p> : undefined)}
             <FormLabel htmlFor="password">
                 Password:
             </FormLabel>
             <FormInput type='password' name='password' onChange={handleChange} value={formData.password} />
-            <button onClick={(type === 'signup' ? history.goBack : undefined)}>{(type === 'signup' ? 'Sign Up' : 'Log in')}</button>
+            {(errors.password.length > 0 ? <p>{errors.password}</p> : undefined)}
+            <button onClick={(type === 'signup' ? history.goBack : undefined)} disabled={disabled}>{(type === 'signup' ? 'Sign Up' : 'Log in')}</button>
         </Form>
     )
 }
