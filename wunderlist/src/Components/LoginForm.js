@@ -41,7 +41,7 @@ const LoginForm = ({type}) => {
 
     useEffect(() => {
         formSchema.validate(formData).then(() => {
-            setDisabled(!disabled)
+            setDisabled(false)
         })
     }, [formData])
 
@@ -66,14 +66,11 @@ const LoginForm = ({type}) => {
                 setErrors({...errors, [e.target.name]: err.errors[0]});
                 setDisabled(true)
           });
-          console.log(errors)
       };
     
     const submitChange = (e) => {
         e.preventDefault()
-        formSchema.validate(formData).then(() => {
-            console.log(formData)
-        })
+
     }
 
 
