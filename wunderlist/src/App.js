@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom'
+import LoginForm from './Components/LoginForm'
 import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from './ColorPalette'
 import styled from 'styled-components';
 
@@ -56,7 +57,12 @@ function App() {
           <Link to='/signup'><Button type={'signup'}>Sign Up</Button></Link>
           <Link to='/login'><Button type={'signup'}>Log In</Button></Link>
         </ButtonContainer>
-
+      </Route>
+      <Route path="/signup">
+        <LoginForm type= 'signup'/>
+      </Route>
+      <Route path="/login">
+        <LoginForm type= 'login'/>
       </Route>
     </MainContainer>
   );
