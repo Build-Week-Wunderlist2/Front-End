@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+// import { axiosWithAuth } from '../utils/axiosWithAuth';
 import * as yup from 'yup';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const Form = styled.form`
 display: flex;
