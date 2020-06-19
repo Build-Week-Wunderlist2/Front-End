@@ -84,56 +84,63 @@ const SubmitButton = styled.button`
 `;
 
 const formInitial = {
-    email: '',
+    username: '',
     password: ''
 }
 
 
-const LoginForm = ({type}, props) => {
-    const [formData, setFormData] = useState(formInitial);
-    const [errors, setErrors] = useState(formInitial);
+const LoginForm = ({type}) => {
+    const [formData, setFormData] = useState(formInitial)
+    const [errors, setErrors] = useState(formInitial)
     const [disabled, setDisabled] = useState(true)
-    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        formSchema.validate(formData).then(() => {
+            setDisabled(false)
+        })
+        .catch (err => {
+            //
+        })
+    }, [formData])
 
     const formSchema = yup.object().shape({
-        email: yup.string().email('Must be a valid email').required('Email is required'),
-        password: yup.string().min(6).required('A password is required')
+        username: yup.string().required('Email is required').email('Must be a valid email'),
+        password: yup.string().required('A password is required').min(6, 'Minimum 6 characters')
       });
 
 
-    const handleChange = (e) => {
+    const handleChange = e => {
+        e.persist()
         setFormData({...formData, [e.target.name]: e.target.value})
+        validateChange(e)
     };
 
+    const validateChange = e => {
+        yup.reach(formSchema, e.target.name).validate((e.target.value))
+          .then(valid => {
+            setErrors({...errors, [e.target.name]: ""});
+          })
+          .catch(err => {
+                setErrors({...errors, [e.target.name]: err.errors[0]});
+                setDisabled(true)
+          });
+      };
+    
     const submitChange = (e) => {
         e.preventDefault()
-        formSchema.validate(formData).then({
-            
-        })
+    }
 
-        axios
-            .post("https://todolist1213.herokuapp.com/api/auth/regiser",formData)
-            .then(res=>{
 
-                localStorage.setItem("token",res.data.payload);
-                props.history.push("/login");
-                console.log(res)
-            })
-        .catch(err=>
-          console.log(err.message));
-        };
-        // setFormData(FormInitial)
-    
 
     let history = useHistory();
     return (
-    <Form onSubmit={submitChange}>
+        <Form onSubmit={submitChange}>
             
             <FormLabel htmlFor="email">
                 Email
             </FormLabel>
             <ErrorContainer>
-                <FormInput name='email' onChange={handleChange} value={formData.email} placeholder='Please enter your email'/>
+                <FormInput name='email' onChange={handleChange} value={formData.username} placeholder='Please enter your email'/>
                 {(errors.email.length > 0 ? <pre>{errors.email}</pre> : undefined)}
             </ErrorContainer>
             <FormLabel htmlFor="password">
