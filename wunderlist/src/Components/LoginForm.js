@@ -110,14 +110,14 @@ const LoginForm = ({type}, props) => {
             
         })
         axios
-            .post("https://todolist1213.herokuapp.com/api/regiser",formData)
+            .post("https://todolist1213.herokuapp.com/api/auth/regiser",formData)
             .then(res=>{
                 localStorage.setItem("token",res.data.payload);
                 props.history.push("/login");
                 console.log(res)
             })
         .catch(err=>
-          console.error(err.message));
+          console.log(err.message));
         };
         // setFormData(FormInitial)
     
