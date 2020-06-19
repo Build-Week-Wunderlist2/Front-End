@@ -130,6 +130,7 @@ const LoginForm = ({type}) => {
         e.preventDefault()
         axios
         .post('https://todolist1213.herokuapp.com/api/auth/register')
+        console.log(e);
         .then(res=>{
             console.log(res);
         })
@@ -148,7 +149,7 @@ const LoginForm = ({type}) => {
                 Email
             </FormLabel>
             <ErrorContainer>
-                <FormInput name='username' onChange={handleChange} value={formData.username} placeholder='Please enter your email'/>
+                <FormInput type="string" name='username' onChange={handleChange} value={formData.username} placeholder='Please enter your email'/>
                 {(errors.username.length > 0 ? <pre>{errors.username}</pre> : undefined)}
             </ErrorContainer>
             <FormLabel htmlFor="password">
