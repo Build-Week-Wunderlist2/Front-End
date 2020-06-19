@@ -77,7 +77,6 @@ function App() {
         <LoginForm type= 'login'/>
       </Route>
       {/* <PrivateRoute exact path ="/wunderlist" component ={WunderList}/> */}
-      <Route path="/login" component={LoginForm} />
     </MainContainer>
   );
 }
