@@ -128,7 +128,7 @@ const LoginForm = ({type}) => {
 
     const submitChange = (e) => {
         e.preventDefault()
-        axiosWithAuth
+        axiosWithAuth()
         .post("/auth/register", formData)
         .then(res=>{
             localStorage.setItem("token",res.data.payload);
