@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from '../ColorPalette';
@@ -125,7 +127,7 @@ const LoginForm = ({type}) => {
                 setDisabled(true)
           });
       };
-
+    
     const submitChange = (e) => {
         e.preventDefault()
     }
@@ -135,7 +137,7 @@ const LoginForm = ({type}) => {
     let history = useHistory();
     return (
         <Form onSubmit={submitChange}>
-
+            
             <FormLabel htmlFor="email">
                 Email
             </FormLabel>
@@ -155,4 +157,4 @@ const LoginForm = ({type}) => {
     )
 }
 
-export default
+export default LoginForm
