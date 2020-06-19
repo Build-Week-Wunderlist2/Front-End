@@ -131,7 +131,6 @@ const LoginForm = ({type}) => {
         axios
         .post('https://todolist1213.herokuapp.com/api/auth/register')
         .then(res=>{
-            localStorage.setItem("token",res.data.payload)
             console.log(res);
         })
         .catch(err=>{
