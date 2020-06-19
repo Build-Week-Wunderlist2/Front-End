@@ -4,7 +4,7 @@ import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from '../Col
 import { device } from '../Breakpoints';
 import styled from 'styled-components';
 import * as yup from 'yup';
-import axiosWithAuth from '../utils/axiosWithAuth';
+import axiosWithAuth from '..utils/axiosWithAuth';
 
 const Form = styled.form`
 display: flex;
@@ -128,7 +128,7 @@ const LoginForm = ({type}) => {
 
     const submitChange = (e) => {
         e.preventDefault()
-        axiosWithAuth()
+        axiosWithAuth
         .post("/auth/register", formData)
         .then(res=>{
             localStorage.setItem("token",res.data.payload);
