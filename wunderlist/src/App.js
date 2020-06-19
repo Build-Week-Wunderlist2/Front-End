@@ -15,6 +15,11 @@ const MainContainer = styled.div`
   width: 100vw;
   overflow: hidden;
   margin: 0;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
 `;
 
 const MainHeading = styled.h1`
@@ -62,7 +67,7 @@ function App() {
   return (
     <MainContainer>
       <MainHeading>
-        Wonderlist 2.0
+        <Link to="/">Wonderlist 2.0</Link>
       </MainHeading>
       <Route exact path="/">
         <ButtonContainer>
