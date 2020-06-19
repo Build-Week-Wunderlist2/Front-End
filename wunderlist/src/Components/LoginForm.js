@@ -4,6 +4,7 @@ import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from '../Col
 import { device } from '../Breakpoints';
 import styled from 'styled-components';
 import * as yup from 'yup';
+import axios from 'axios'
 
 const Form = styled.form`
 display: flex;
@@ -110,13 +111,13 @@ const LoginForm = ({type}) => {
             setDisabled(false)
         })
         .catch (err => {
-            
+            //
         })
     }, [formData])
 
     const formSchema = yup.object().shape({
         email: yup.string().required('Email is required').email('Must be a valid email'),
-        password: yup.string().required('A password is required').min(6)
+        password: yup.string().required('A password is required').min(6, 'Minimum 6 characters')
       });
 
 
@@ -139,7 +140,6 @@ const LoginForm = ({type}) => {
     
     const submitChange = (e) => {
         e.preventDefault()
-
     }
 
 
