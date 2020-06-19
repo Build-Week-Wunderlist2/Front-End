@@ -89,7 +89,7 @@ const formInitial = {
 };
 
 
-const LoginForm = ({type}) => {
+const RegisterForm = ({type}) => {
     const [formData, setFormData] = useState(formInitial)
     const [errors, setErrors] = useState(formInitial)
     const [disabled, setDisabled] = useState(true)
@@ -130,7 +130,7 @@ const LoginForm = ({type}) => {
     const submitChange = (e) => {
         e.preventDefault()
          axios
-        .post('https://todolist1213.herokuapp.com/api/auth/login', formData)
+        .post('https://todolist1213.herokuapp.com/api/auth/register', formData)
         .then(res=>{
             console.log(res);
         })
@@ -164,4 +164,4 @@ const LoginForm = ({type}) => {
     )
 }
 
-export default LoginForm
+export default RegisterForm;
