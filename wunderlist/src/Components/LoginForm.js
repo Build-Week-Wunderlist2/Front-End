@@ -126,17 +126,26 @@ const LoginForm = ({type}, props) => {
 
     let history = useHistory();
     return (
-        <Form onSubmit={submitChange}>
+    <Form onSubmit={submitChange}>
+            
             <FormLabel htmlFor="email">
-                Email:
+                Email
             </FormLabel>
-            <FormInput name='email' onChange={handleChange} value={formData.email} placeholder='Please enter your email'/>
+            <ErrorContainer>
+                <FormInput name='email' onChange={handleChange} value={formData.email} placeholder='Please enter your email'/>
+                {(errors.email.length > 0 ? <pre>{errors.email}</pre> : undefined)}
+            </ErrorContainer>
             <FormLabel htmlFor="password">
-                Password:
+                Password
             </FormLabel>
+            <ErrorContainer>
             <FormInput type='password' name='password' onChange={handleChange} value={formData.password} />
-            <button type="submit">{(type === 'signup' ? 'Sign Up' : 'Log in')}</button>
+            {(errors.password.length > 0 ? <pre>{errors.password}</pre> : undefined)}
+            </ErrorContainer>
+            <SubmitButton onClick={(type === 'signup' ? history.goBack : undefined)} disabled={disabled}>{(type === 'signup' ? 'Sign Up' : 'Log in')}</SubmitButton>
         </Form>
+    )
+}
     )
 }
 
