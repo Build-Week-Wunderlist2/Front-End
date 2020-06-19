@@ -164,4 +164,4 @@ const LoginForm = ({type}) => {
     )
 }
 
-export default
+export default LoginForm;
