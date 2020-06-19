@@ -127,12 +127,13 @@ const LoginForm = ({type}, props) => {
       };
 
     const submitChange = (e) => {
+        const token = localStorage.getItem("token");
         e.preventDefault()
         axios
         .post("https://todolist1213.herokuapp.com/api/auth/register", formData)
         .then(res=>{
             localStorage.setItem("token",res.data.payload);
-            props.history.push("/");
+            props.history.push("/login");
             console.log(res);
         })
         .catch(err=>
