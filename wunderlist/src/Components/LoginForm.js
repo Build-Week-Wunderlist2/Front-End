@@ -109,9 +109,11 @@ const LoginForm = ({type}, props) => {
         formSchema.validate(formData).then({
             
         })
+
         axios
             .post("https://todolist1213.herokuapp.com/api/auth/regiser",formData)
             .then(res=>{
+
                 localStorage.setItem("token",res.data.payload);
                 props.history.push("/login");
                 console.log(res)
@@ -133,7 +135,7 @@ const LoginForm = ({type}, props) => {
                 Password:
             </FormLabel>
             <FormInput type='password' name='password' onChange={handleChange} value={formData.password} />
-            <button>{(type === 'signup' ? 'Sign Up' : 'Log in')}</button>
+            <button type="submit">{(type === 'signup' ? 'Sign Up' : 'Log in')}</button>
         </Form>
     )
 }
