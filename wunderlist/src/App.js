@@ -5,7 +5,6 @@ import { device } from './Breakpoints'
 import { DarkGold, LightTan } from './ColorPalette'
 
 import styled from 'styled-components';
-;
 
 const MainContainer = styled.div`
   display: flex;
@@ -16,6 +15,10 @@ const MainContainer = styled.div`
   width: 100vw;
   overflow: hidden;
   margin: 0;
+  a {
+    text-decoration: none;
+    color: black;
+  }
 `;
 
 const MainHeading = styled.h1`
@@ -33,24 +36,18 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-
   @media ${device.laptop} {
     width: 40%;
 }  
-
 @media ${device.tablet} {
     width: 55%;
 }  
-
   @media ${device.mobileL} {
     width: 70%;
 }
-
 @media ${device.mobileM} {
     width: 90%;
 }
-
-
 `;
 
 const Button = styled.button`
@@ -63,7 +60,7 @@ function App() {
   return (
     <MainContainer>
       <MainHeading>
-        Wonderlist 2.0
+        <Link to="/">Wonderlist 2.0</Link>
       </MainHeading>
       <Route exact path="/">
         <ButtonContainer>
@@ -78,7 +75,6 @@ function App() {
         <LoginForm type= 'login'/>
       </Route>
       {/* <PrivateRoute exact path ="/wunderlist" component ={WunderList}/> */}
-      <Route path="/login" component={LoginForm} />
     </MainContainer>
   );
 }
