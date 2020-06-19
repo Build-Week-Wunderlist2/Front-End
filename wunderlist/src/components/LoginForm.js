@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import styled from 'styled-components'
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 import * as yup from 'yup';
 
 const Form = styled.form`
