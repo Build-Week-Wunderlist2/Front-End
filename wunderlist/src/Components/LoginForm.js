@@ -4,7 +4,7 @@ import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from '../Col
 import { device } from '../Breakpoints';
 import styled from 'styled-components';
 import * as yup from 'yup';
-import axiosWithAuth from '..utils/axiosWithAuth';
+import { axiosWithAuth } from '..utils/axiosWithAuth';
 
 const Form = styled.form`
 display: flex;
