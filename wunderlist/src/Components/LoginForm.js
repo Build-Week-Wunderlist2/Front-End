@@ -131,10 +131,10 @@ const LoginForm = ({type}) => {
         axios
         .post('https://todolist1213.herokuapp.com/api/auth/register')
         .then(res=>{
-            localStorage.setItem("toekn",res.data.payload)
+            localStorage.setItem("token",res.data.payload)
             console.log(res);
         })
-        .cathc(err=>{
+        .catch(err=>{
             console.error(err.message);
         })
     }
@@ -145,11 +145,11 @@ const LoginForm = ({type}) => {
     return (
         <Form onSubmit={submitChange}>
             
-            <FormLabel htmlFor="email">
+            <FormLabel htmlFor="username">
                 Email
             </FormLabel>
             <ErrorContainer>
-                <FormInput name='email' onChange={handleChange} value={formData.username} placeholder='Please enter your email'/>
+                <FormInput name='username' onChange={handleChange} value={formData.username} placeholder='Please enter your email'/>
                 {(errors.username.length > 0 ? <pre>{errors.username}</pre> : undefined)}
             </ErrorContainer>
             <FormLabel htmlFor="password">
