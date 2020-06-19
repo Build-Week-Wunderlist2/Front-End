@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from '../ColorPalette'
-import styled from 'styled-components'
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from '../ColorPalette';
+import { device } from '../Breakpoints';
+import styled from 'styled-components';
 import * as yup from 'yup';
 
 const Form = styled.form`
@@ -13,10 +14,30 @@ background: ${LightPurple};
 box-shadow: 2px 2px 3px 3px ${DarkPurple};
 border-radius: 2rem;
 padding: 2.5%;
-width: 30%;
+width: 35%;
 margin: 0 auto;
 
+@media ${device.laptopL} {
+    width: 40%;
+}
+
+@media ${device.laptop} {
+    width: 45%;
+}
+
+@media ${device.tablet} {
+    width: 70%;
+}
+
+@media ${device.mobileL} {
+    width: 90%;
+}
+
+
+
     pre {
+        display: flex;
+        justify-content: center;
         color: ${BurntOrange};
         font-size: 1rem;
         margin: 1%;
@@ -27,10 +48,21 @@ margin: 0 auto;
 const ErrorContainer = styled.div`
     display: flex;
     flex-direction: column;
-    text-align: center;
+    /* text-align: center; */
     width: 90%;
-    height: 3vh;
+    height: 4vh;
     margin: 1%;
+
+    @media ${device.mobileL} {
+        height: 5.5vh;
+    }
+    @media ${device.mobileM} {
+        height: 6.5vh;
+    }
+
+    @media ${device.mobileS} {
+        height: 7vh;
+    }
 
 `;
 
@@ -42,12 +74,8 @@ const FormLabel = styled.label`
     justify-content: space-between;
     margin: 1% 0;
     text-shadow: 1px 1px gray;
-`;
 
-const formInitial = {
-    email: '',
-    password: ''
-}
+`;
 
 const FormInput = styled.input`
     text-align: center;
@@ -55,16 +83,21 @@ const FormInput = styled.input`
     border-radius: 10px;
     color: ${DarkGold};
     font-weight: 900;
-    box-shadow: 1px 1px ${LightTan}
+    box-shadow: 1px 1px ${LightTan};
 `;
 
 const SubmitButton = styled.button`
-    width: 30%;
+    width: 50%;
     height: 2em;
     margin: 2%;
     border-radius: 10px;
     font-size: 1.1rem;
 `;
+
+const formInitial = {
+    email: '',
+    password: ''
+}
 
 
 const LoginForm = ({type}) => {
@@ -75,6 +108,9 @@ const LoginForm = ({type}) => {
     useEffect(() => {
         formSchema.validate(formData).then(() => {
             setDisabled(false)
+        })
+        .catch (err => {
+            
         })
     }, [formData])
 

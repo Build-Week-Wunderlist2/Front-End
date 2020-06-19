@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom'
 import LoginForm from './Components/LoginForm'
-import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from './ColorPalette'
+import { device } from './Breakpoints'
+import { DarkGold, LightTan } from './ColorPalette'
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
@@ -19,21 +20,35 @@ const MainHeading = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   font-size: 4rem;
   font-weight: 700;
   text-shadow: 3px 3px ${DarkGold};
 `;
 
-const MainParagraph = styled.p`
-  display: flex;
-  justify-content: center;
-`;
-
 const ButtonContainer = styled.div`
-  width: 50%;
+  width: 30%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: 0 auto;
+
+  @media ${device.laptop} {
+    width: 40%;
+}  
+
+@media ${device.tablet} {
+    width: 55%;
+}  
+
+  @media ${device.mobileL} {
+    width: 70%;
+}
+
+@media ${device.mobileM} {
+    width: 90%;
+}
+
+
 `;
 
 const Button = styled.button`
