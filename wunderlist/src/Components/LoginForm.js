@@ -4,7 +4,7 @@ import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from '../Col
 import { device } from '../Breakpoints';
 import styled from 'styled-components';
 import * as yup from 'yup';
-import axios from 'axios'
+import axiosWithAuth from '../utils/axiosWithAuth';
 
 const Form = styled.form`
 display: flex;
@@ -128,7 +128,16 @@ const LoginForm = ({type}) => {
 
     const submitChange = (e) => {
         e.preventDefault()
-    }
+        axiosWithAuth()
+        .post("/auth/register", formData)
+        .then(res=>{
+            localStorage.setItem("token",res.data.payload);
+            props.history.push("/");
+            console.log(res);
+        })
+        .catch(err=>
+        console.error(err.message));
+    };
 
 
 
