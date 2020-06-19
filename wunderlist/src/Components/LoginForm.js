@@ -128,9 +128,9 @@ const LoginForm = ({type}) => {
     
     const submitChange = (e) => {
         e.preventDefault()
+        console.log(e)
         axios
         .post('https://todolist1213.herokuapp.com/api/auth/register')
-        console.log(e);
         .then(res=>{
             console.log(res);
         })
