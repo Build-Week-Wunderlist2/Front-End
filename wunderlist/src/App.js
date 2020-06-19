@@ -6,9 +6,6 @@ import { DarkGold, LightTan } from './ColorPalette'
 
 import styled from 'styled-components';
 
-import PrivateRoute from './components/PrivateRoute';
-import LoginForm from './components/LoginForm';
-
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
