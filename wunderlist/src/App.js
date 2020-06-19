@@ -3,7 +3,11 @@ import { Link, Route } from 'react-router-dom'
 import LoginForm from './Components/LoginForm'
 import { device } from './Breakpoints'
 import { DarkGold, LightTan } from './ColorPalette'
+
 import styled from 'styled-components';
+
+import PrivateRoute from './components/PrivateRoute';
+import LoginForm from './components/LoginForm';
 
 const MainContainer = styled.div`
   display: flex;
@@ -75,6 +79,9 @@ function App() {
       <Route path="/login">
         <LoginForm type= 'login'/>
       </Route>
+      {/* <PrivateRoute exact path ="/wunderlist" component ={WunderList}/> */}
+      <Route path="/login" component={LoginForm} />
+     </Switch>
     </MainContainer>
   );
 }
