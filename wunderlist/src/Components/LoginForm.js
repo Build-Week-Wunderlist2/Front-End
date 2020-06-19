@@ -4,7 +4,7 @@ import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from '../Col
 import { device } from '../Breakpoints';
 import styled from 'styled-components';
 import * as yup from 'yup';
-import axios from 'axios'
+import axios from 'axios';
 
 const Form = styled.form`
 display: flex;
@@ -86,7 +86,7 @@ const SubmitButton = styled.button`
 const formInitial = {
     username: '',
     password: ''
-}
+};
 
 
 const LoginForm = ({type}) => {
@@ -150,7 +150,7 @@ const LoginForm = ({type}) => {
             </FormLabel>
             <ErrorContainer>
                 <FormInput name='email' onChange={handleChange} value={formData.username} placeholder='Please enter your email'/>
-                {(errors.email.length > 0 ? <pre>{errors.email}</pre> : undefined)}
+                {(errors.username.length > 0 ? <pre>{errors.username}</pre> : undefined)}
             </ErrorContainer>
             <FormLabel htmlFor="password">
                 Password
