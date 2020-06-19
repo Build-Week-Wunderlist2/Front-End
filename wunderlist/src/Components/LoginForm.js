@@ -84,7 +84,7 @@ const SubmitButton = styled.button`
 `;
 
 const formInitial = {
-    email: '',
+    username: '',
     password: ''
 }
 
@@ -93,6 +93,7 @@ const LoginForm = ({type}, props) => {
     const [formData, setFormData] = useState(formInitial)
     const [errors, setErrors] = useState(formInitial)
     const [disabled, setDisabled] = useState(true)
+    const [is Loading, setIsLoading] = useState(false);
 
     useEffect(() => {
         formSchema.validate(formData).then(() => {
@@ -127,12 +128,14 @@ const LoginForm = ({type}, props) => {
       };
 
     const submitChange = (e) => {
-        const token = localStorage.getItem("token");
         e.preventDefault()
+        setIsLoading(true);
         axios
         .post("https://todolist1213.herokuapp.com/api/auth/register", formData)
         .then(res=>{
+            localStorage.getItem("token");
             localStorage.setItem("token",res.data.payload);
+            setIsLoading(false);
             props.history.push("/login");
             console.log(res);
         })
@@ -146,12 +149,12 @@ const LoginForm = ({type}, props) => {
     return (
         <Form onSubmit={submitChange}>
 
-            <FormLabel htmlFor="email">
-                Email
+            <FormLabel htmlFor="username">
+                Username
             </FormLabel>
             <ErrorContainer>
-                <FormInput name='email' onChange={handleChange} value={formData.email} placeholder='Please enter your email'/>
-                {(errors.email.length > 0 ? <pre>{errors.email}</pre> : undefined)}
+                <FormInput name='username' onChange={handleChange} value={formData.username} placeholder='Please enter your username'/>
+                {(errors.username.length > 0 ? <pre>{errors.username}</pre> : undefined)}
             </ErrorContainer>
             <FormLabel htmlFor="password">
                 Password
@@ -160,7 +163,7 @@ const LoginForm = ({type}, props) => {
             <FormInput type='password' name='password' onChange={handleChange} value={formData.password} />
             {(errors.password.length > 0 ? <pre>{errors.password}</pre> : undefined)}
             </ErrorContainer>
-            <SubmitButton onClick={(type === "signup" ? history.goBack : undefined)} disabled={disabled}>{(type === 'login' ? 'Sign Up' : 'Log in')}</SubmitButton>
+            <SubmitButton type="submit">{(type === 'signup' ? 'Sign Up' : 'Log in')}</SubmitButton>
         </Form>
     )
 }
