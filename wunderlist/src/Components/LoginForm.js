@@ -159,7 +159,7 @@ const LoginForm = ({type}) => {
             <FormInput type='password' name='password' onChange={handleChange} value={formData.password} />
             {(errors.password.length > 0 ? <pre>{errors.password}</pre> : undefined)}
             </ErrorContainer>
-            <SubmitButton onClick={(type === 'signup' ? history.goBack : undefined)} disabled={disabled}>{(type === 'signup' ? 'Sign Up' : 'Log in')}</SubmitButton>
+            <SubmitButton type="submit"} disabled={disabled}>{(type === 'signup' ? 'Sign Up' : 'Log in')}</SubmitButton>
         </Form>
     )
 }
