@@ -17,25 +17,18 @@ border-radius: 2rem;
 padding: 2.5%;
 width: 35%;
 margin: 0 auto;
-
 @media ${device.laptopL} {
     width: 40%;
 }
-
 @media ${device.laptop} {
     width: 45%;
 }
-
 @media ${device.tablet} {
     width: 70%;
 }
-
 @media ${device.mobileL} {
     width: 90%;
 }
-
-
-
     pre {
         display: flex;
         justify-content: center;
@@ -43,7 +36,6 @@ margin: 0 auto;
         font-size: 1rem;
         margin: 1%;
     }
-
 `;
 
 const ErrorContainer = styled.div`
@@ -53,18 +45,15 @@ const ErrorContainer = styled.div`
     width: 90%;
     height: 4vh;
     margin: 1%;
-
     @media ${device.mobileL} {
         height: 5.5vh;
     }
     @media ${device.mobileM} {
         height: 6.5vh;
     }
-
     @media ${device.mobileS} {
         height: 7vh;
     }
-
 `;
 
 // div style={{display: 'flex', flexDirection: 'column', width: '50%', height: '3vh', positionLeft: '50%'}}>
@@ -75,7 +64,6 @@ const FormLabel = styled.label`
     justify-content: space-between;
     margin: 1% 0;
     text-shadow: 1px 1px gray;
-
 `;
 
 const FormInput = styled.input`
@@ -137,7 +125,7 @@ const LoginForm = ({type}) => {
                 setDisabled(true)
           });
       };
-    
+
     const submitChange = (e) => {
         e.preventDefault()
     }
@@ -147,7 +135,7 @@ const LoginForm = ({type}) => {
     let history = useHistory();
     return (
         <Form onSubmit={submitChange}>
-            
+
             <FormLabel htmlFor="email">
                 Email
             </FormLabel>
@@ -167,5 +155,4 @@ const LoginForm = ({type}) => {
     )
 }
 
-export default LoginForm
-
+export default
