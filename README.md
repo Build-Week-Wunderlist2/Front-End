@@ -5,7 +5,5 @@ Brandon Stine - React 1 Front End <br />
  - Our project is deployed here: (https://wunderlist20.vercel.app/)
  - Product Canvas (https://trello.com/b/SbXcyFAZ/wunderlist-2)
     
-    Some text here about the app
-    
+    Some text here about the app   
 ## Teammate Contributions
-
