@@ -1,6 +1,9 @@
 import React from 'react';
-import { Link, Route, Switch } from 'react-router-dom'
-import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from './ColorPalette'
+import { Link, Route } from 'react-router-dom'
+import LoginForm from './Components/LoginForm'
+import { device } from './Breakpoints'
+import { DarkGold, LightTan } from './ColorPalette'
+
 import styled from 'styled-components';
 
 import PrivateRoute from './components/PrivateRoute';
@@ -21,45 +24,60 @@ const MainHeading = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   font-size: 4rem;
   font-weight: 700;
   text-shadow: 3px 3px ${DarkGold};
 `;
 
-const MainParagraph = styled.p`
-  display: flex;
-  justify-content: center;
-`;
-
 const ButtonContainer = styled.div`
-  width: 50%;
+  width: 30%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: 0 auto;
+
+  @media ${device.laptop} {
+    width: 40%;
+}  
+
+@media ${device.tablet} {
+    width: 55%;
+}  
+
+  @media ${device.mobileL} {
+    width: 70%;
+}
+
+@media ${device.mobileM} {
+    width: 90%;
+}
+
+
 `;
 
 const Button = styled.button`
   width: 5em;
   font-size: 1.6rem;
   margin: 1%;
-  ${prop => prop.type === 'signup' ? 'axios locations' : 'axios location'}
 `;
 
 function App() {
   return (
     <MainContainer>
       <MainHeading>
-        Wonderlust 2.0
+        Wonderlist 2.0
       </MainHeading>
-        <MainParagraph>
-          All the words
-        </MainParagraph>
-    <Switch>
-      <Route exact path="/" >
+      <Route exact path="/">
         <ButtonContainer>
-          <Link to='/signup'><Button type={'signup'}>Sign Up</Button></Link>
-          <Link to='/login'><Button type={'signup'}>Log In</Button></Link>
+          <Link to='/signup'><Button>Sign Up</Button></Link>
+          <Link to='/login'><Button>Log In</Button></Link>
         </ButtonContainer>
+      </Route>
+      <Route path="/signup">
+        <LoginForm type= 'signup'/>
+      </Route>
+      <Route path="/login">
+        <LoginForm type= 'login'/>
       </Route>
       {/* <PrivateRoute exact path ="/wunderlist" component ={WunderList}/> */}
       <Route path="/login" component={LoginForm} />
