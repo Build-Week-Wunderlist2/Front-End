@@ -146,7 +146,5 @@ const LoginForm = ({type}, props) => {
         </Form>
     )
 }
-    )
-}
 
 export default LoginForm
