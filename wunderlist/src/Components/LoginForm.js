@@ -93,7 +93,7 @@ const LoginForm = ({type}, props) => {
     const [formData, setFormData] = useState(formInitial)
     const [errors, setErrors] = useState(formInitial)
     const [disabled, setDisabled] = useState(true)
-    const [is Loading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         formSchema.validate(formData).then(() => {
