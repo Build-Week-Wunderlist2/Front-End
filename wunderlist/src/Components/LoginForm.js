@@ -112,6 +112,7 @@ const LoginForm = ({type}) => {
     const handleChange = e => {
         e.persist()
         setFormData({...formData, [e.target.name]: e.target.value})
+        console.log(setFormData)
         validateChange(e)
     };
 
@@ -128,8 +129,7 @@ const LoginForm = ({type}) => {
     
     const submitChange = (e) => {
         e.preventDefault()
-        console.log(e)
-        axios
+         axios
         .post('https://todolist1213.herokuapp.com/api/auth/register')
         .then(res=>{
             console.log(res);
