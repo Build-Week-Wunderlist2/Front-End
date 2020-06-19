@@ -84,7 +84,7 @@ const SubmitButton = styled.button`
 `;
 
 const formInitial = {
-    username: '',
+    email: '',
     password: ''
 }
 
@@ -93,7 +93,7 @@ const LoginForm = ({type}, props) => {
     const [formData, setFormData] = useState(formInitial)
     const [errors, setErrors] = useState(formInitial)
     const [disabled, setDisabled] = useState(true)
-    const [isLoading, setIsLoading] = useState(false);
+    const [is Loading, setIsLoading] = useState(false);
 
     useEffect(() => {
         formSchema.validate(formData).then(() => {
@@ -149,12 +149,12 @@ const LoginForm = ({type}, props) => {
     return (
         <Form onSubmit={submitChange}>
 
-            <FormLabel htmlFor="username">
-                Username
+            <FormLabel htmlFor="email">
+                Email
             </FormLabel>
             <ErrorContainer>
-                <FormInput name='username' onChange={handleChange} value={formData.username} placeholder='Please enter your username'/>
-                {(errors.username.length > 0 ? <pre>{errors.username}</pre> : undefined)}
+                <FormInput name='email' onChange={handleChange} value={formData.email} placeholder='Please enter your email'/>
+                {(errors.email.length > 0 ? <pre>{errors.email}</pre> : undefined)}
             </ErrorContainer>
             <FormLabel htmlFor="password">
                 Password
@@ -163,7 +163,7 @@ const LoginForm = ({type}, props) => {
             <FormInput type='password' name='password' onChange={handleChange} value={formData.password} />
             {(errors.password.length > 0 ? <pre>{errors.password}</pre> : undefined)}
             </ErrorContainer>
-            <SubmitButton type="submit">{(type === 'signup' ? 'Sign Up' : 'Log in')}</SubmitButton>
+            <SubmitButton onClick={(type === "signup" ? history.goBack : undefined)} disabled={disabled}>{(type === 'login' ? 'Sign Up' : 'Log in')}</SubmitButton>
         </Form>
     )
 }
