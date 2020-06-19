@@ -128,6 +128,15 @@ const LoginForm = ({type}) => {
     
     const submitChange = (e) => {
         e.preventDefault()
+        axios
+        .post('https://todolist1213.herokuapp.com/api/auth/register')
+        .then(res=>{
+            localStorage.setItem("toekn",res.data.payload)
+            console.log(res);
+        })
+        .cathc(err=>{
+            console.error(err.message);
+        })
     }
 
 
