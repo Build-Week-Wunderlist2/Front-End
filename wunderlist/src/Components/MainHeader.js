@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { DarkGold } from '../ColorPalette';
 
@@ -14,9 +14,11 @@ const MainHeading = styled.h1`
 
 
 const MainHeader = ({type}) => {
+    let userID = useParams().id;
+    let path = (type === 'signup' || type === 'login' ? '/' : `/wunderlist/${userID}`)
     return (
         <MainHeading >
-            <Link to="/">Wonderlist 2.0</Link>
+            <Link to={path}>Wonderlist 2.0</Link>
         </MainHeading>
     )
 }

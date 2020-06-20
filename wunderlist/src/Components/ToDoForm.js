@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
+import MainHeader from './MainHeader'
 
 const initialToDo = {
     
@@ -21,16 +22,19 @@ const ToDoForm = ({updateToDoList}) => {
     };
 
     return(
+        <>
+        <MainHeader />
         <form onSubmit={saveToDo}>
-            <legend>Add To Do</legend>
+            <legend>Add To Do List</legend>
             <input onChange={e=>
-                setAddToDo({...addToDo, something: e.target.value
+                setAddToDo({...addToDo, [e.target.name]: e.target.value
                 })
             }
                 value={addToDo.something}
                 placeholder='What Needs To Be Done'
             />
         </form>
+        </>
     )
 
 }

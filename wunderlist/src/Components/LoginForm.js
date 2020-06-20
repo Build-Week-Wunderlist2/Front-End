@@ -146,8 +146,8 @@ const LoginForm = ({type}, props) => {
         }): axiosWithAuth()
         .post('/auth/login', formData)
         .then(res=>{
-            localStorage.setItem("token",res.data.payload);
-            history.push("/wunderlist");//changed props not used in imported history
+            localStorage.setItem("token",res.data.token);
+            history.push(`/wunderlist/${res.data.user_id}`);//changed props not used in imported history
             console.log(res);
         })
         .catch(err=>console.error(err.message));

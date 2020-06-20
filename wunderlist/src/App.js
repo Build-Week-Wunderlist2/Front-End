@@ -4,6 +4,7 @@ import LoginForm from './Components/LoginForm';
 import { device } from './Breakpoints';
 import { LightTan } from './ColorPalette';
 import PrivateRoute from './Components/PrivateRoute';
+import ToDoForm from './Components/ToDoForm'
 import WunderList from './Components/Wunderlist';
 import MainHeader from './Components/MainHeader'
 import styled from 'styled-components';
@@ -66,7 +67,8 @@ function App() {
       <Route path="/login">
         <LoginForm type= 'login'/>
       </Route>
-      <PrivateRoute exact path ="/wunderlist" component ={WunderList}/>
+      <PrivateRoute exact path ="/wunderlist/:id" component ={WunderList}/>
+      <PrivateRoute exact path ="/user/:id/todos/add" component ={ToDoForm}/>
     </MainContainer>
   );
 }
