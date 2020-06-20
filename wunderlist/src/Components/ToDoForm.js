@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
 const initialToDo = {
     
@@ -7,11 +7,12 @@ const initialToDo = {
 
 const ToDoForm = ({updateToDoList}) => {
     const [addToDo, setAddToDo] = useState(initialToDo);
+    const [editToDo, setToDo] = use
 
     const saveToDo = e => {
         e.preventDefault();
         axiosWithAuth()
-        .post('/', addToDo)
+        .post('/user/todos', addToDo)
         .then(res=>{
             updateToDoList(res.data);
             setAddToDo(initialToDo);

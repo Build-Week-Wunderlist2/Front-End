@@ -6,7 +6,7 @@ import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from '../Col
 import { device } from '../Breakpoints';
 import styled from 'styled-components';
 import * as yup from 'yup';
-import axios from 'axios'
+import  axiosWithAuth from '../utils/axiosWithAuth';
 
 const Form = styled.form`
 display: flex;
@@ -86,12 +86,12 @@ const SubmitButton = styled.button`
 `;
 
 const formInitial = {
-    email: '',
+    username: '',
     password: ''
-}
+};
 
 
-const LoginForm = ({type}) => {
+const LoginForm = ({type}, props) => {
     const [formData, setFormData] = useState(formInitial)
     const [errors, setErrors] = useState(formInitial)
     const [disabled, setDisabled] = useState(true)
@@ -106,7 +106,7 @@ const LoginForm = ({type}) => {
     }, [formData])
 
     const formSchema = yup.object().shape({
-        email: yup.string().required('Email is required').email('Must be a valid email'),
+        username: yup.string().required('Email is required').email('Must be a valid email'),
         password: yup.string().required('A password is required').min(6, 'Minimum 6 characters')
       });
 
@@ -130,6 +130,22 @@ const LoginForm = ({type}) => {
     
     const submitChange = (e) => {
         e.preventDefault()
+        type==='signup' ?
+         axiosWithAuth()
+        .post('/auth/register', formData)
+        .then(res=>{
+            console.log(res);
+        })
+        .catch(err=>{
+            console.error(err.message);
+        }): axiosWithAuth()
+        .post('/auth/login', formData)
+        .then(res=>{
+            localStorage.setItem("token",res.data.payload);
+            // props.history.push("/wunderlist");
+            console.log(res);
+        })
+        .catch(err=>console.error(err.message));
     }
 
 
@@ -138,12 +154,13 @@ const LoginForm = ({type}) => {
     return (
         <Form onSubmit={submitChange}>
             
-            <FormLabel htmlFor="email">
+
+            <FormLabel htmlFor="username">
                 Email
             </FormLabel>
             <ErrorContainer>
-                <FormInput name='email' onChange={handleChange} value={formData.email} placeholder='Please enter your email'/>
-                {(errors.email.length > 0 ? <pre>{errors.email}</pre> : undefined)}
+                <FormInput type="string" name='username' onChange={handleChange} value={formData.username} placeholder='Please enter your email'/>
+                {(errors.username.length > 0 ? <pre>{errors.username}</pre> : undefined)}
             </ErrorContainer>
             <FormLabel htmlFor="password">
                 Password
@@ -152,7 +169,7 @@ const LoginForm = ({type}) => {
             <FormInput type='password' name='password' onChange={handleChange} value={formData.password} />
             {(errors.password.length > 0 ? <pre>{errors.password}</pre> : undefined)}
             </ErrorContainer>
-            <SubmitButton onClick={(type === 'signup' ? history.goBack : undefined)} disabled={disabled}>{(type === 'signup' ? 'Sign Up' : 'Log in')}</SubmitButton>
+            <SubmitButton type="submit" disabled={disabled}>{(type === 'signup' ? 'Sign Up' : 'Log in')}</SubmitButton>
         </Form>
     )
 }
