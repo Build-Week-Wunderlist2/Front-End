@@ -1,52 +1,59 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from '../ColorPalette';
 import { device } from '../Breakpoints';
 import styled from 'styled-components';
 import * as yup from 'yup';
 import  axiosWithAuth from '../utils/axiosWithAuth';
+import MainHeader from './MainHeader'
 
 const Form = styled.form`
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-background: ${LightPurple};
-box-shadow: 2px 2px 3px 3px ${DarkPurple};
-border-radius: 2rem;
-padding: 2.5%;
-width: 35%;
-margin: 0 auto;
-@media ${device.laptopL} {
-    width: 40%;
-}
-@media ${device.laptop} {
-    width: 45%;
-}
-@media ${device.tablet} {
-    width: 70%;
-}
-@media ${device.mobileL} {
-    width: 90%;
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: ${LightPurple};
+    box-shadow: 2px 2px 3px 3px ${DarkPurple};
+    border-radius: 2rem;
+    padding: 2.5%;
+    width: 35%;
+    margin: 0 auto;
+
+    @media ${device.laptopL} {
+        width: 40%;
+    }
+    @media ${device.laptop} {
+        width: 45%;
+    }
+    @media ${device.tablet} {
+        width: 70%;
+    }
+    @media ${device.mobileL} {
+        width: 90%;
+    }
     pre {
         display: flex;
         justify-content: center;
         color: ${BurntOrange};
         font-size: 1rem;
         margin: 1%;
+
+        @media ${device.mobileM} {
+        font-size: .7rem;
     }
+
+}
 `;
 
 const ErrorContainer = styled.div`
     display: flex;
     flex-direction: column;
-    /* text-align: center; */
     width: 90%;
     height: 4vh;
     margin: 1%;
+
     @media ${device.mobileL} {
         height: 5.5vh;
     }
@@ -57,8 +64,6 @@ const ErrorContainer = styled.div`
         height: 7vh;
     }
 `;
-
-// div style={{display: 'flex', flexDirection: 'column', width: '50%', height: '3vh', positionLeft: '50%'}}>
 
 const FormLabel = styled.label`
     font-size: 1.3rem;
@@ -142,7 +147,7 @@ const LoginForm = ({type}, props) => {
         .post('/auth/login', formData)
         .then(res=>{
             localStorage.setItem("token",res.data.payload);
-            // props.history.push("/wunderlist");
+            history.push("/wunderlist");//changed props not used in imported history
             console.log(res);
         })
         .catch(err=>console.error(err.message));
@@ -152,9 +157,9 @@ const LoginForm = ({type}, props) => {
 
     let history = useHistory();
     return (
+        <>
+        <MainHeader type={type}/>
         <Form onSubmit={submitChange}>
-            
-
             <FormLabel htmlFor="username">
                 Email
             </FormLabel>
@@ -171,6 +176,7 @@ const LoginForm = ({type}, props) => {
             </ErrorContainer>
             <SubmitButton type="submit" disabled={disabled}>{(type === 'signup' ? 'Sign Up' : 'Log in')}</SubmitButton>
         </Form>
+        </>
     )
 }
 

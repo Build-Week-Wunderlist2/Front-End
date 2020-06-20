@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 const initialToDo = {
@@ -7,7 +7,7 @@ const initialToDo = {
 
 const ToDoForm = ({updateToDoList}) => {
     const [addToDo, setAddToDo] = useState(initialToDo);
-    const [editToDo, setToDo] = use
+    const [editToDo, setToDo] = useState();
 
     const saveToDo = e => {
         e.preventDefault();
