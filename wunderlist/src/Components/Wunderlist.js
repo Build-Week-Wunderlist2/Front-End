@@ -34,6 +34,13 @@ const getUserToDo = (id) => {
         console.log(err)
     })
 }
+const getUserTaskList = (id) => {
+    axiosWithAuth().get(`/user/${id}/task`).then(res => {
+        console.log(res)
+    }).catch(err => {
+        console.log(err)
+    })
+}
 //this should handle the display
 const Wunderlist = () => {
     const [newButton, setNewButton] = useState(false);
@@ -51,7 +58,8 @@ const Wunderlist = () => {
     console.log(newButton)
     return (
         <MainContainer>
-            {/* <button onClick={() => {getUserToDo(userID)}}>test</button> */}
+            <button onClick={() => {getUserToDo(userID)}}>test for get todos list</button>
+            {<button onClick={() => {getUserTaskList(userID)}}>test for get task list</button>}
             <CardHeading>
                 <h1>Welcome to Wunderlist 2.0</h1>
                 <p>Please click on 'Add List' to get started.</p>
