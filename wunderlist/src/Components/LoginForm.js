@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from '../ColorPalette';
@@ -152,6 +154,7 @@ const LoginForm = ({type}, props) => {
     return (
         <Form onSubmit={submitChange}>
             
+
             <FormLabel htmlFor="username">
                 Email
             </FormLabel>
