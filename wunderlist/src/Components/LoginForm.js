@@ -139,8 +139,8 @@ const LoginForm = ({type}, props) => {
         }): axiosWithAuth()
         .post('/auth/login', formData)
         .then(res=>{
-            localStorage.setItem("token",res.data.payload);
-            // props.history.push("/wunderlist");
+            localStorage.setItem("token",res.data.token);
+            // props.history.push(`/wunderlist`);
             console.log(res);
         })
         .catch(err=>console.error(err.message));
