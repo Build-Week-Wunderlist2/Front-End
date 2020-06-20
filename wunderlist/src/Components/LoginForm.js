@@ -4,7 +4,7 @@ import { DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple } from '../Col
 import { device } from '../Breakpoints';
 import styled from 'styled-components';
 import * as yup from 'yup';
-import axios from 'axios';
+import  axiosWithAuth from '../utils/axiosWithAuth';
 
 const Form = styled.form`
 display: flex;
@@ -129,14 +129,15 @@ const LoginForm = ({type}, props) => {
     const submitChange = (e) => {
         e.preventDefault()
         type==='signup' ?
-         axios
-        .post('https://todolist1213.herokuapp.com/api/auth/register', formData)
+         axiosWithAuth()
+        .post('/auth/register', formData)
         .then(res=>{
             console.log(res);
         })
         .catch(err=>{
             console.error(err.message);
-        }): axios.post('http://todolist1213.herokuapp.com/api/auth/login', formData)
+        }): axiosWithAuth()
+        .post('/auth/login', formData)
         .then(res=>{
             localStorage.setItem("token",res.data.payload);
             // props.history.push("/wunderlist");

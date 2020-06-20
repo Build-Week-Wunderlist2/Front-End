@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom'
-// import RegisterForm from './Components/RegisterForm'
 import LoginForm from './Components/LoginForm';
 import { device } from './Breakpoints'
 import { DarkGold, LightTan } from './ColorPalette'
