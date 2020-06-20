@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom'
-import RegisterForm from './Components/RegisterForm'
+// import RegisterForm from './Components/RegisterForm'
 import LoginForm from './Components/LoginForm';
 import { device } from './Breakpoints'
 import { DarkGold, LightTan } from './ColorPalette'
@@ -70,7 +70,7 @@ function App() {
         </ButtonContainer>
       </Route>
       <Route path="/signup">
-        <RegisterForm type= 'signup'/>
+        <LoginForm type= 'signup'/>
       </Route>
       <Route path="/login">
         <LoginForm type= 'login'/>

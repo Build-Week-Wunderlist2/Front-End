@@ -89,7 +89,7 @@ const formInitial = {
 };
 
 
-const LoginForm = ({type}) => {
+const LoginForm = ({type}, props) => {
     const [formData, setFormData] = useState(formInitial)
     const [errors, setErrors] = useState(formInitial)
     const [disabled, setDisabled] = useState(true)
@@ -112,7 +112,6 @@ const LoginForm = ({type}) => {
     const handleChange = e => {
         e.persist()
         setFormData({...formData, [e.target.name]: e.target.value})
-        console.log(formData)
         validateChange(e)
     };
 
@@ -129,14 +128,21 @@ const LoginForm = ({type}) => {
     
     const submitChange = (e) => {
         e.preventDefault()
+        type==='signup' ?
          axios
-        .post('https://todolist1213.herokuapp.com/api/auth/login', formData)
+        .post('https://todolist1213.herokuapp.com/api/auth/register', formData)
         .then(res=>{
             console.log(res);
         })
         .catch(err=>{
             console.error(err.message);
+        }): axios.post('http://todolist1213.herokuapp.com/api/auth/login', formData)
+        .then(res=>{
+            localStorage.setItem("token",res.data.payload);
+            // props.history.push("/wunderlist");
+            console.log(res);
         })
+        .catch(err=>console.error(err.message));
     }
 
 
