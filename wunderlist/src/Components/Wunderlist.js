@@ -9,6 +9,14 @@ import DisplayCard from './DisplayCard'
 const MainContainer = styled.div`
     height: 100vh;
     width: 100vw;
+
+    input {
+        text-align: center;
+        display: flex;
+        height: 3%;
+        width: 30%;
+        margin: 1% auto;
+    }
 `;
 
 const CardHeading = styled.div`
@@ -23,6 +31,12 @@ const CardHeading = styled.div`
     p {
         font-size: 1.5rem;
     }
+`;
+
+const ContentContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 `;
 
 
@@ -43,39 +57,53 @@ const getUserTaskList = (id) => {
 }
 //this should handle the display
 const Wunderlist = () => {
-    const [newButton, setNewButton] = useState(false);
     const userID = useParams().id;
+    const [newButton, setNewButton] = useState(false);
     const [toDoList, setToDoList] = useState();
-    const [searchResult, setSearchResult] = useState(toDoList);//future search
+    const [search, setSearch] = useState('');
+    const [searchResult, setSearchResult] = useState();
+
     useEffect(()=> {
         axiosWithAuth().get(`/user/${userID}/todos`).then(res => {
             setToDoList(res.data)
+            setSearchResult(res.data)
         }).catch(err => {
             console.log(err)
         })
-    }, [newButton])
-    console.log(toDoList)
-    console.log(newButton)
+    }, [])
+
+    useEffect(() => {
+        if(toDoList){
+          const results = toDoList.filter(obj => {
+            return obj.title.toLowerCase().includes(search.toLowerCase())
+          })
+          return setSearchResult(results)
+        }
+      }, [search]);
+
+    const handleSearch = (e) => {
+        setSearch(e.target.value)
+    }
     return (
         <MainContainer>
             <button onClick={() => {getUserToDo(userID)}}>test for get todos list</button>
-            {<button onClick={() => {getUserTaskList(userID)}}>test for get task list</button>}
+            <button onClick={() => {getUserTaskList(userID)}}>test for get task list</button>
             <CardHeading>
                 <h1>Welcome to Wunderlist 2.0</h1>
                 <p>Please click on 'Add List' to get started.</p>
             </CardHeading>
-            <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+            <ContentContainer >
                 <button onClick={() => setNewButton(!newButton)}>Add List</button>
                 {(newButton === true ? <ToDoForm setNewButton={setNewButton} /> : undefined)}
-            </div>
-            {/* <Link to={`/user/${userID}/todos/add`}><button style={{width: '25%'}}>Add List</button></Link> */}
-            <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-                {!toDoList
+            </ContentContainer>
+            <input name='Search' placeholder='Search For Task Name' onChange={handleSearch}/>
+            <ContentContainer >
+                {!searchResult
                 ? <p>please hold</p>
-                : toDoList.map(obj => {
+                : searchResult.map(obj => {
                     return <DisplayCard key={obj.id} card={obj}/> 
                 })}
-            </div>
+            </ContentContainer>
 
         </MainContainer>
     )
