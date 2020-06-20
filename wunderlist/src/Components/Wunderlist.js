@@ -10,13 +10,14 @@ const MainContainer = styled.div`
     height: 100vh;
     width: 100vw;
 
-    input {
-        text-align: center;
-        display: flex;
-        height: 3%;
-        width: 30%;
-        margin: 1% auto;
-    }
+`;
+
+const SearchInput = styled.input`
+    text-align: center;
+    display: flex;
+    height: 3%;
+    width: 30%;
+    margin: 1% auto;
 `;
 
 const CardHeading = styled.div`
@@ -96,7 +97,7 @@ const Wunderlist = () => {
                 <button onClick={() => setNewButton(!newButton)}>Add List</button>
                 {(newButton === true ? <ToDoForm setNewButton={setNewButton} /> : undefined)}
             </ContentContainer>
-            <input name='Search' placeholder='Search For Task Name' onChange={handleSearch}/>
+            <SearchInput  name='Search' placeholder='Search For Task Name' onChange={handleSearch}/>
             <ContentContainer >
                 {!searchResult
                 ? <p>please hold</p>
