@@ -6,7 +6,7 @@ import * as yup from 'yup';
 
 
 
-const ToDoForm = ({updateToDoList}) => {
+const ToDoForm = ({updateToDoList, setNewButton}) => {
     let date = new Date().toLocaleString().split(',')[0];
     const initialToDo = {
         title: "",
@@ -23,7 +23,8 @@ const ToDoForm = ({updateToDoList}) => {
         axiosWithAuth()
         .post('/user/todos', addToDo)
         .then(res=>{
-            updateToDoList(res.data);
+            // updateToDoList(res.data);
+            setNewButton(false)
             setAddToDo(initialToDo);
         })
         .catch(err=>console.log("error: ", err));
@@ -38,9 +39,7 @@ const ToDoForm = ({updateToDoList}) => {
 
     return(
         <>
-        <MainHeader />
         <form onSubmit={saveToDo}>
-            <legend>Add To Do List</legend>
             <input name='title' onChange={handleChange} value={addToDo.something} placeholder='Name of Task'/>
             <button type="submit">Add</button>
         </form>

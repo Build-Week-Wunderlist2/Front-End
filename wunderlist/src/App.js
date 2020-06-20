@@ -68,7 +68,6 @@ function App() {
         <LoginForm type= 'login'/>
       </Route>
       <PrivateRoute exact path ="/wunderlist/:id" component ={WunderList}/>
-      <PrivateRoute exact path ="/user/:id/todos/add" component ={ToDoForm}/>
     </MainContainer>
   );
 }
