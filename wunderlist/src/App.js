@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom'
-import LoginForm from './Components/LoginForm'
+import LoginForm from './Components/LoginForm';
 import { device } from './Breakpoints'
 import { DarkGold, LightTan } from './ColorPalette'
 
@@ -15,7 +15,7 @@ const MainContainer = styled.div`
   width: 100vw;
   overflow: hidden;
   margin: 0;
-
+  
   a {
     text-decoration: none;
     color: black;
@@ -37,24 +37,18 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-
   @media ${device.laptop} {
     width: 40%;
 }  
-
 @media ${device.tablet} {
     width: 55%;
 }  
-
   @media ${device.mobileL} {
     width: 70%;
 }
-
 @media ${device.mobileM} {
     width: 90%;
 }
-
-
 `;
 
 const Button = styled.button`
