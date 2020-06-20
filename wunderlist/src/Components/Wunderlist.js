@@ -5,6 +5,8 @@ import ToDoForm from './ToDoForm'
 import axios from 'axios';
 import styled from 'styled-components';
 
+
+
 const getUserToDo = (id) => {
     axiosWithAuth().get(`/user/${id}/todos`).then(res => {
         console.log(res)
@@ -17,7 +19,7 @@ const Wunderlist = () => {
     const userID = useParams().id;
     return (
         <>
-        {/* <button onClick={() => {getUserToDo(userID)}}>test</button> */}
+        <button onClick={() => {getUserToDo(userID)}}>test</button>
         
         <h1>Welcome to Wunderlist 2.0</h1>
         <p>Please click on Add Task to get started.</p>

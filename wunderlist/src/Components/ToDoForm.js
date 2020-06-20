@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom'
 import axiosWithAuth from '../utils/axiosWithAuth';
-import MainHeader from './MainHeader'
+import MainHeader from './MainHeader';
+import * as yup from 'yup';
 
-const initialToDo = {
-    
-}
+
 
 const ToDoForm = ({updateToDoList}) => {
+    let date = new Date().toLocaleString().split(',')[0];
+    const initialToDo = {
+        title: "",
+        complete: false,
+        user_id: useParams().id,
+        date: date,
+    }
+
     const [addToDo, setAddToDo] = useState(initialToDo);
     const [editToDo, setToDo] = useState();
 
@@ -21,18 +29,20 @@ const ToDoForm = ({updateToDoList}) => {
         .catch(err=>console.log("error: ", err));
     };
 
+    const handleChange = e => {
+        e.persist()
+        setAddToDo({...addToDo, [e.target.name]: e.target.value})
+        // validateChange(e)
+    };
+
+
     return(
         <>
         <MainHeader />
         <form onSubmit={saveToDo}>
             <legend>Add To Do List</legend>
-            <input onChange={e=>
-                setAddToDo({...addToDo, [e.target.name]: e.target.value
-                })
-            }
-                value={addToDo.something}
-                placeholder='What Needs To Be Done'
-            />
+            <input name='title' onChange={handleChange} value={addToDo.something} placeholder='Name of Task'/>
+            <button type="submit">Add</button>
         </form>
         </>
     )
