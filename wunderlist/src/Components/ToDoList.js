@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
-import { ToDoContext } from '../contexts/ToDoContext';
 import ToDoForm from './ToDoForm';
 
 const initialToDo = {
@@ -29,56 +28,51 @@ const ToDoList =({todo, updateToDo}) => {
         setEditToDo(todo);
     };
 
-    const saveToDo = e => {
+    const saveToDo = (e) => {
         e.preventDefault();
         type === 'todo' ? 
         axiosWithAuth()
         .put(`/user/todos/${editTodo.id}`, editToDo)
-        .then(res=>{
-            console.log(res)
+        .then(res => {
             this.handleReload();
         })
-        .catch(err=>{
+        .catch(err => {
             console.error(
-                "ToDoList.js: saveToDo",
                 err.message,
                 err.response
             );
         }) : axiosWithAuth()
         .put(`/user/task/${editTask.id}`, editTask)
-        .then(res=>{
-            console.log(res)
+        .then(res => {
             this.handleReload();
         })
-        .catch(err=>console.error(err.message));
+        .catch(err => console.error(err.message));
+        
     };
 
     const deleteToDo = todo => {
         type === 'todo' ? 
         axiosWithAuth()
         .delete(`user/todos/${todo.id}`)
-        .then(res=>{
+        .then(res => {
             setEditToDo(res.data);
         })
-        .catch(err=>{
-            console.error(
-                "ToDoList.js: deleteToDo: todo",
+        .catch(err => { console.error(   
                 err.message,
                 err.response
-            )}
-        ) : axiosWithAuth()
+            );
+        }) : axiosWithAuth()
         .delete(`user/${id}/task`)
-        .then(res=>{
+        .then(res => {
             setEditTask(res.data);
         })
-        .catch(err=>{
+        .catch(err => { 
             console.error(
-                "ToDoList.js: deleteToDo: task",
-                err.message,
-                err.resposne
-            )
-        })
-    };
+            err.message
+           );
+        });
+       };
+
 
     return(
         <div className="todo-wrap">
@@ -126,4 +120,6 @@ const ToDoList =({todo, updateToDo}) => {
         )}
 
     </div>
-    )};
+    )}
+
+export default ToDoList;

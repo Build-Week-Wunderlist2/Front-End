@@ -142,11 +142,11 @@ const LoginForm = ({type}, props) => {
         .post('/auth/login', formData)
         .then(res=>{
             localStorage.setItem("token",res.data.token);
-            // props.history.push(`/wunderlist`);
+            props.history.push(`/wunderlist`);
             console.log(res);
         })
         .catch(err=>console.error(err.message));
-    }
+    };
 
 
 
