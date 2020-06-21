@@ -96,7 +96,7 @@ const formInitial = {
 };
 
 
-const LoginForm = ({type}, props) => {
+const LoginForm = ({type}) => {
     const [formData, setFormData] = useState(formInitial)
     const [errors, setErrors] = useState(formInitial)
     const [disabled, setDisabled] = useState(true)

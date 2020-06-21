@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axiosWithAuth from '../utils/axiosWithAuth'
 import ToDoForm from './ToDoForm'
 import styled from 'styled-components';
@@ -9,7 +9,6 @@ import DisplayCard from './DisplayCard'
 const MainContainer = styled.div`
     height: 100vh;
     width: 100vw;
-
 `;
 
 const SearchInput = styled.input`
@@ -71,7 +70,7 @@ const Wunderlist = () => {
         }).catch(err => {
             console.log(err)
         })
-    }, [])
+    }, [newButton])
 
     useEffect(() => {
         if(toDoList){
