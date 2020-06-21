@@ -148,10 +148,9 @@ const LoginForm = ({type}, props) => {
         .then(res=>{
             localStorage.setItem("token",res.data.token);
             history.push(`/wunderlist/${res.data.user_id}`);//changed props not used in imported history
-            console.log(res);
         })
         .catch(err=>console.error(err.message));
-    }
+    };
 
 
 
