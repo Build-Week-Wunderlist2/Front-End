@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom'
 import axiosWithAuth from '../utils/axiosWithAuth';
-import MainHeader from './MainHeader';
-import * as yup from 'yup';
 
 
 
-const ToDoForm = ({updateToDoList, setNewButton}) => {
+const ToDoForm = ({setNewButton}) => {
     let date = new Date().toLocaleString().split(',')[0];
     const initialToDo = {
         title: "",
@@ -16,7 +14,6 @@ const ToDoForm = ({updateToDoList, setNewButton}) => {
     }
 
     const [addToDo, setAddToDo] = useState(initialToDo);
-    const [editToDo, setToDo] = useState();
 
     const saveToDo = e => {
         e.preventDefault();
