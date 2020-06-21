@@ -1,9 +1,12 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom';
 import LoginForm from './Components/LoginForm';
-import { device } from './Breakpoints'
-import { DarkGold, LightTan } from './ColorPalette'
-
+import { device } from './Breakpoints';
+import { LightTan } from './ColorPalette';
+import PrivateRoute from './Components/PrivateRoute';
+import ToDoForm from './Components/ToDoForm'
+import WunderList from './Components/Wunderlist';
+import MainHeader from './Components/MainHeader'
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
@@ -15,21 +18,13 @@ const MainContainer = styled.div`
   width: 100vw;
   overflow: hidden;
   margin: 0;
+
   a {
     text-decoration: none;
     color: black;
   }
 `;
 
-const MainHeading = styled.h1`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-size: 4rem;
-  font-weight: 700;
-  text-shadow: 3px 3px ${DarkGold};
-`;
 
 const ButtonContainer = styled.div`
   width: 30%;
@@ -59,10 +54,8 @@ const Button = styled.button`
 function App() {
   return (
     <MainContainer>
-      <MainHeading>
-        <Link to="/">Wonderlist 2.0</Link>
-      </MainHeading>
       <Route exact path="/">
+        <MainHeader />
         <ButtonContainer>
           <Link to='/signup'><Button>Sign Up</Button></Link>
           <Link to='/login'><Button>Log In</Button></Link>
@@ -74,7 +67,7 @@ function App() {
       <Route path="/login">
         <LoginForm type= 'login'/>
       </Route>
-      {/* <PrivateRoute exact path ="/wunderlist" component ={WunderList}/> */}
+      <PrivateRoute exact path ="/wunderlist/:id" component ={WunderList}/>
     </MainContainer>
   );
 }
