@@ -71,7 +71,7 @@ const Wunderlist = () => {
         }).catch(err => {
             console.log(err)
         })
-    }, [])
+    }, [newButton])
 
     useEffect(() => {
         if(toDoList){
