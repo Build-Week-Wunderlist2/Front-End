@@ -128,7 +128,7 @@ const DisplayCard = ({card, type, updateToDo}) => {
             <button onClick={()=>setEditing(false)}>cancel</button>
         </form>
         )}
-    {/* <ToDoForm updateToDo={updateToDo} /> */}
+    <ToDoForm updateToDo={updateToDo} />
     </CardContainer>
     )}
 
