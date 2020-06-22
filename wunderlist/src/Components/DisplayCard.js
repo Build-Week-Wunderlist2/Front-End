@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { LightTan } from '../ColorPalette';
-
-
+import ToDoForm from './ToDoForm';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
 const CardContainer = styled.div`
     display: flex;
@@ -21,14 +20,116 @@ const CardContainer = styled.div`
 
 `;
 
+const initialToDo = {
+    title: '',
+    complete: false,
+};
 
-const DisplayCard = ({card}) => {
+const initialTask = {
+    description: '',
+    complete: false,
+    repeatsDaily: false,
+    repeatsWeekly: false,
+    repeatsMonthly: false
+};
+
+const DisplayCard = ({card, type, updateToDo}) => {
+    const [editing, setEditing] = useState(false);
+    const [todoToEdit, setToDoToEdit] = useState(initialToDo);
+    const [taskToEdit, setTaskToEdit] = useState(initialTask);
+
+    const editToDo = cards => {
+       setEditing(true);
+       setToDoToEdit(cards);
+    };
+    const saveEdit = e => {
+        e.preventDefault();
+        type === 'todo' ? 
+        axiosWithAuth()
+        .put(`/user/todos/:id`, todoToEdit)
+        .then(res => {
+            this.handleReload();
+        })
+        .catch(err => {
+            console.error(
+                err.message,
+                err.response
+            );
+        }) : axiosWithAuth()
+        .put(`/user/task/:id`, taskToEdit)
+        .then(res => {
+            this.handleReload();
+        })
+        .catch(err => console.error(err.message));
+        
+    };
+
+        const deleteToDo = () => {
+    //    type==='todo' ?
+         axiosWithAuth()
+        .delete('user/todos/:id')
+        .then(res => {
+        setToDoToEdit(res.data);
+        })
+        .catch(err => { console.error(   
+                err.message,
+                err.response
+            );
+        }) 
+        // : axiosWithAuth()
+        // .delete(`user/:id/task`)
+        // .then(res => {
+        //     setTaskToEdit(res.data);
+        // })
+        // .catch(err => { 
+        //     console.error(
+        //     err.message
+        //    );
+        };
+   
     return (
-    <CardContainer >
-        <button>Edit</button>
+    <CardContainer>
+        <button key={card.title} onClick={()=>editToDo(card)}>Edit</button>
+         <button onClick={e =>{ e.stopPropagation();
+            deleteToDo(card)
+            }
+        }>Delete</button>
         <h2>{card.title}</h2>
         <p>{(card.date !== null ? (card.date.split('T')[0]): undefined)}</p>
-    </CardContainer>)
-}
+         {editing && (
+            <form onSubmit={saveEdit}>
+                <legend>Edit To Do</legend>
+                <label>
+                    To Do
+                    <input
+                    onChange={e=>
+                    setToDoToEdit({...todoToEdit, title: e.target.value})
+                }
+                value = {
+                    todoToEdit.title
+                }
+                />
+                </label>
+        
+        
+        {/* : editing && ( 
+        <form onSubmit ={saveEdit}>
+            <legend>Edit Task</legend>
+            <label>Task:
+                <input onChange ={e=>setEditTask({...editToDo,description: e.target.value})
+                }
+                value={editToDo.description}
+                />
+            </label>
+        </form>
+        )} */}
+        {/* <ToDoForm updateTodo={updateToDo}/> */}
+            <button type="submit">save</button>
+            <button onClick={()=>setEditing(false)}>cancel</button>
+        </form>
+        )}
+    <ToDoForm updateToDo={updateToDo} />
+    </CardContainer>
+    )}
 
 export default DisplayCard
