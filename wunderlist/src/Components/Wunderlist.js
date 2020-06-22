@@ -23,11 +23,9 @@ const CardHeading = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-
     h1 {
         font-size: 2.4rem;
     }
-
     p {
         font-size: 1.5rem;
     }
@@ -112,4 +110,4 @@ const Wunderlist = () => {
 
 }
 
-export default Wunderlist
+export default Wunderlist;

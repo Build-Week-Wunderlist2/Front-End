@@ -12,13 +12,14 @@ const CardContainer = styled.div`
     height: 100%;
     min-width: 30%;
     border: 2px solid red;
-
     p {
         width: 10%;
         padding: 1%;
         margin: 1%;
     }
+`;
 
+const CardHeader = styled.div`
 `;
 
 const CardHeader = styled.div`
