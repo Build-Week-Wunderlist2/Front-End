@@ -4,15 +4,16 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 
 
 
-const ToDoForm = ({setNewButton}) => {
+const ToDoForm = ({setNewButton, renderToDo, setRenderToDo}) => {
     let date = new Date().toLocaleString().split(',')[0];
+    let userID = useParams().id;
     const initialToDo = {
         title: "",
         complete: false,
-        user_id: useParams().id,
-        date: date,
+        user_id: userID,
+        created_at: date,
     }
-
+    
     const [addToDo, setAddToDo] = useState(initialToDo);
 
     const saveToDo = e => {
@@ -21,8 +22,9 @@ const ToDoForm = ({setNewButton}) => {
         .post('/user/todos', addToDo)
         .then(res=>{
             // updateToDoList(res.data);
+            setRenderToDo(!renderToDo)
             setNewButton(false)
-            setAddToDo(initialToDo);
+            // setAddToDo(initialToDo);
         })
         .catch(err=>console.log("error: ", err));
     };
