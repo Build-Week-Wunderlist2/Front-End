@@ -62,15 +62,17 @@ const Wunderlist = () => {
     const [toDoList, setToDoList] = useState();
     const [search, setSearch] = useState('');
     const [searchResult, setSearchResult] = useState();
+    const [renderToDo, setRenderToDo] = useState(false)
 
     useEffect(()=> {
         axiosWithAuth().get(`/user/${userID}/todos`).then(res => {
             setToDoList(res.data)
             setSearchResult(res.data)
+            console.log(res.data)
         }).catch(err => {
             console.log(err)
         })
-    }, [newButton])
+    }, [renderToDo])
 
     useEffect(() => {
         if(toDoList){
@@ -101,7 +103,7 @@ const Wunderlist = () => {
                 {!searchResult
                 ? <p>please hold</p>
                 : searchResult.map(obj => {
-                    return <DisplayCard key={obj.id} card={obj}/> 
+                    return <DisplayCard key={obj.id} id={obj.id} card={obj} userID={userID}/> 
                 })}
             </ContentContainer>
 

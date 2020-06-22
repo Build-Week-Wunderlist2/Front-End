@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import ToDoForm from './ToDoForm';
 import axiosWithAuth from '../utils/axiosWithAuth';
@@ -33,7 +34,8 @@ const initialTask = {
     repeatsMonthly: false
 };
 
-const DisplayCard = ({card, type, updateToDo}) => {
+
+const DisplayCard = ({ card, type, updateToDo, userID, id }) => {
     const [editing, setEditing] = useState(false);
     const [todoToEdit, setToDoToEdit] = useState(initialToDo);
     const [taskToEdit, setTaskToEdit] = useState(initialTask);
@@ -46,7 +48,7 @@ const DisplayCard = ({card, type, updateToDo}) => {
         e.preventDefault();
         type === 'todo' ? 
         axiosWithAuth()
-        .put(`/user/todos/:id`, todoToEdit)
+        .put(`/user/todos/${userID}`, todoToEdit)
         .then(res => {
             this.handleReload();
         })
@@ -56,7 +58,7 @@ const DisplayCard = ({card, type, updateToDo}) => {
                 err.response
             );
         }) : axiosWithAuth()
-        .put(`/user/task/:id`, taskToEdit)
+        .put(`/user/task/${userID}`, taskToEdit)
         .then(res => {
             this.handleReload();
         })
@@ -67,9 +69,10 @@ const DisplayCard = ({card, type, updateToDo}) => {
         const deleteToDo = () => {
     //    type==='todo' ?
          axiosWithAuth()
-        .delete('user/todos/:id')
+        .delete(`user/todos/${id}`)
         .then(res => {
         setToDoToEdit(res.data);
+        console.log(res)
         })
         .catch(err => { console.error(   
                 err.message,
