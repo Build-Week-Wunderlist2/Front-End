@@ -67,7 +67,7 @@ const Wunderlist = () => {
     useEffect(()=> {
         axiosWithAuth().get(`/user/${userID}/todos`).then(res => {
             setToDoList(res.data)
-            setSearchResult(res.data)
+            setSearchResult(res.data.sort((a, b) => (a.id > b.id) ? -1 : 1))
             console.log(res.data)
         }).catch(err => {
             console.log(err)
@@ -79,6 +79,7 @@ const Wunderlist = () => {
           const results = toDoList.filter(obj => {
             return obj.title.toLowerCase().includes(search.toLowerCase())
           })
+          console.log('how do i sort these',results.sort((a, b) => (a.title > b.title) ? 1 : -1))
           return setSearchResult(results)
         }
       }, [search]);
