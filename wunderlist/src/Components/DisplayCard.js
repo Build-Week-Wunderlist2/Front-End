@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import ToDoForm from './ToDoForm';
 import axiosWithAuth from '../utils/axiosWithAuth';
@@ -11,13 +12,14 @@ const CardContainer = styled.div`
     height: 100%;
     min-width: 30%;
     border: 2px solid red;
-
     p {
         width: 10%;
         padding: 1%;
         margin: 1%;
     }
+`;
 
+const CardHeader = styled.div`
 `;
 
 const initialToDo = {
@@ -33,44 +35,48 @@ const initialTask = {
     repeatsMonthly: false
 };
 
-const DisplayCard = ({card, type, updateToDo}) => {
+
+const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRenderToDo }) => {
     const [editing, setEditing] = useState(false);
     const [todoToEdit, setToDoToEdit] = useState(initialToDo);
     const [taskToEdit, setTaskToEdit] = useState(initialTask);
 
     const editToDo = cards => {
-       setEditing(true);
+       setEditing(!editing);
        setToDoToEdit(cards);
     };
-    const saveEdit = (e, id) => {
+    const saveEdit = e => {
         e.preventDefault();
-        // type === 'todo' ? 
+        type === 'todo' ? 
         axiosWithAuth()
         .put(`/user/todos/${id}`, todoToEdit)
         .then(res => {
-            this.handleReload();
+            setRenderToDo(!renderToDo)
+            setEditing(false)
+            // this.handleReload();
         })
         .catch(err => {
             console.error(
                 err.message,
                 err.response
             );
-        }) 
-        // : axiosWithAuth()
-        // .put(`/user/${id}/tasks`, taskToEdit)
-        // .then(res => {
-        //     this.handleReload();
-        // })
-        // .catch(err => console.error(err.message));
+        }) : axiosWithAuth()
+        .put(`/user/task/${userID}`, taskToEdit)
+        .then(res => {
+            this.handleReload();
+        })
+        .catch(err => console.error(err.message));
         
     };
 
-        const deleteToDo = (id) => {
+        const deleteToDo = () => {
     //    type==='todo' ?
          axiosWithAuth()
         .delete(`user/todos/${id}`)
         .then(res => {
         setToDoToEdit(res.data);
+        setRenderToDo(!renderToDo)
+        console.log(res)
         })
         .catch(err => { console.error(   
                 err.message,
@@ -91,12 +97,12 @@ const DisplayCard = ({card, type, updateToDo}) => {
     return (
     <CardContainer>
         <button key={card.title} onClick={()=>editToDo(card)}>Edit</button>
-         <button onClick={e =>{ e.stopPropagation();
+        <button onClick={e =>{ e.stopPropagation();
             deleteToDo(card)
             }
         }>Delete</button>
         <h2>{card.title}</h2>
-        <p>{(card.date !== null ? (card.date.split('T')[0]): undefined)}</p>
+        <p>{(card.created_at !== null ? (card.created_at.split('T')[0]): undefined)}</p>
          {editing && (
             <form onSubmit={saveEdit}>
                 <legend>Edit To Do</legend>

@@ -23,11 +23,9 @@ const CardHeading = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-
     h1 {
         font-size: 2.4rem;
     }
-
     p {
         font-size: 1.5rem;
     }
@@ -62,15 +60,17 @@ const Wunderlist = () => {
     const [toDoList, setToDoList] = useState();
     const [search, setSearch] = useState('');
     const [searchResult, setSearchResult] = useState();
+    const [renderToDo, setRenderToDo] = useState(false)
 
     useEffect(()=> {
         axiosWithAuth().get(`/user/${userID}/todos`).then(res => {
             setToDoList(res.data)
-            setSearchResult(res.data)
+            setSearchResult(res.data.sort((a, b) => (a.id > b.id) ? -1 : 1))
+            console.log(res.data)
         }).catch(err => {
             console.log(err)
         })
-    }, [newButton])
+    }, [renderToDo])
 
     useEffect(() => {
         if(toDoList){
@@ -86,22 +86,22 @@ const Wunderlist = () => {
     }
     return (
         <MainContainer>
-            <button onClick={() => {getUserToDo(userID)}}>test for get todos list</button>
-            <button onClick={() => {getUserTaskList(userID)}}>test for get task list</button>
+            <button style={{width: '25%', height: '3vh', fontSize: '1.5rem'}} onClick={() => {getUserToDo(userID)}}>test for get todos list</button>
+            <button style={{width: '25%', height: '3vh', fontSize: '1.5rem'}} onClick={() => {getUserTaskList(userID)}}>test for get task list</button>
             <CardHeading>
                 <h1>Welcome to Wunderlist 2.0</h1>
                 <p>Please click on 'Add List' to get started.</p>
             </CardHeading>
             <ContentContainer >
                 <button onClick={() => setNewButton(!newButton)}>Add List</button>
-                {(newButton === true ? <ToDoForm setNewButton={setNewButton} /> : undefined)}
+                {(newButton === true ? <ToDoForm setRenderToDo={setRenderToDo} setNewButton={setNewButton} renderToDo={renderToDo} /> : undefined)}
             </ContentContainer>
             <SearchInput  name='Search' placeholder='Search For Task Name' onChange={handleSearch}/>
             <ContentContainer >
                 {!searchResult
                 ? <p>please hold</p>
                 : searchResult.map(obj => {
-                    return <DisplayCard key={obj.id} card={obj}/> 
+                    return <DisplayCard type='todo' key={obj.id} id={obj.id} card={obj} userID={userID} setRenderToDo={setRenderToDo} renderToDo={renderToDo}/> 
                 })}
             </ContentContainer>
 
@@ -110,4 +110,4 @@ const Wunderlist = () => {
 
 }
 
-export default Wunderlist
+export default Wunderlist;
