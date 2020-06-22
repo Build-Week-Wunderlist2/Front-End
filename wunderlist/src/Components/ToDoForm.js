@@ -25,7 +25,7 @@ const ToDoForm = ({updateToDoList, setNewButton}) => {
         .then(res=>{
             // updateToDoList(res.data);
             setNewButton(false)
-            setAddToDo(initialToDo);
+            // setAddToDo(initialToDo);
         })
         .catch(err=>console.log("error: ", err));
     };
