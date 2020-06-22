@@ -4,7 +4,7 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 
 
 
-const ToDoForm = ({setNewButton}) => {
+const ToDoForm = ({setNewButton, renderToDo, setRenderToDo}) => {
     let date = new Date().toLocaleString().split(',')[0];
     const initialToDo = {
         title: "",
@@ -21,6 +21,7 @@ const ToDoForm = ({setNewButton}) => {
         .post('/user/todos', addToDo)
         .then(res=>{
             // updateToDoList(res.data);
+            setRenderToDo(!renderToDo)
             setNewButton(false)
             // setAddToDo(initialToDo);
         })

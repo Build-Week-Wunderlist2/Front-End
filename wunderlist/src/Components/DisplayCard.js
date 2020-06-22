@@ -35,7 +35,7 @@ const initialTask = {
 };
 
 
-const DisplayCard = ({ card, type, updateToDo, userID, id }) => {
+const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRenderToDo }) => {
     const [editing, setEditing] = useState(false);
     const [todoToEdit, setToDoToEdit] = useState(initialToDo);
     const [taskToEdit, setTaskToEdit] = useState(initialTask);
@@ -48,8 +48,9 @@ const DisplayCard = ({ card, type, updateToDo, userID, id }) => {
         e.preventDefault();
         type === 'todo' ? 
         axiosWithAuth()
-        .put(`/user/todos/${userID}`, todoToEdit)
+        .put(`/user/todos/${id}`, todoToEdit)
         .then(res => {
+            setRenderToDo(!renderToDo)
             this.handleReload();
         })
         .catch(err => {
@@ -72,6 +73,7 @@ const DisplayCard = ({ card, type, updateToDo, userID, id }) => {
         .delete(`user/todos/${id}`)
         .then(res => {
         setToDoToEdit(res.data);
+        setRenderToDo(!renderToDo)
         console.log(res)
         })
         .catch(err => { console.error(   

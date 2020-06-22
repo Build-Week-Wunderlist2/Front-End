@@ -96,14 +96,14 @@ const Wunderlist = () => {
             </CardHeading>
             <ContentContainer >
                 <button onClick={() => setNewButton(!newButton)}>Add List</button>
-                {(newButton === true ? <ToDoForm setNewButton={setNewButton} /> : undefined)}
+                {(newButton === true ? <ToDoForm setRenderToDo={setRenderToDo} setNewButton={setNewButton} renderToDo={renderToDo} /> : undefined)}
             </ContentContainer>
             <SearchInput  name='Search' placeholder='Search For Task Name' onChange={handleSearch}/>
             <ContentContainer >
                 {!searchResult
                 ? <p>please hold</p>
                 : searchResult.map(obj => {
-                    return <DisplayCard key={obj.id} id={obj.id} card={obj} userID={userID}/> 
+                    return <DisplayCard type='todo' key={obj.id} id={obj.id} card={obj} userID={userID} setRenderToDo={setRenderToDo} renderToDo={renderToDo}/> 
                 })}
             </ContentContainer>
 
