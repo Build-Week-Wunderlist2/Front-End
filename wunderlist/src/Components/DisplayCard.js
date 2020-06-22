@@ -42,11 +42,11 @@ const DisplayCard = ({card, type, updateToDo}) => {
        setEditing(true);
        setToDoToEdit(cards);
     };
-    const saveEdit = e => {
+    const saveEdit = (e, id) => {
         e.preventDefault();
-        type === 'todo' ? 
+        // type === 'todo' ? 
         axiosWithAuth()
-        .put(`/user/todos/:id`, todoToEdit)
+        .put(`/user/todos/${id}`, todoToEdit)
         .then(res => {
             this.handleReload();
         })
@@ -55,19 +55,20 @@ const DisplayCard = ({card, type, updateToDo}) => {
                 err.message,
                 err.response
             );
-        }) : axiosWithAuth()
-        .put(`/user/task/:id`, taskToEdit)
-        .then(res => {
-            this.handleReload();
-        })
-        .catch(err => console.error(err.message));
+        }) 
+        // : axiosWithAuth()
+        // .put(`/user/${id}/tasks`, taskToEdit)
+        // .then(res => {
+        //     this.handleReload();
+        // })
+        // .catch(err => console.error(err.message));
         
     };
 
-        const deleteToDo = () => {
+        const deleteToDo = (id) => {
     //    type==='todo' ?
          axiosWithAuth()
-        .delete('user/todos/:id')
+        .delete(`user/todos/${id}`)
         .then(res => {
         setToDoToEdit(res.data);
         })

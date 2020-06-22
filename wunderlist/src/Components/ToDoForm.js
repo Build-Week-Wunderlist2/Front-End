@@ -15,10 +15,10 @@ const ToDoForm = ({setNewButton}) => {
 
     const [addToDo, setAddToDo] = useState(initialToDo);
 
-    const saveToDo = e => {
+    const saveToDo = (e, id) => {
         e.preventDefault();
         axiosWithAuth()
-        .post('/user/todos', addToDo)
+        .post(`/user/task/${id}`, addToDo)
         .then(res=>{
             // updateToDoList(res.data);
             setNewButton(false)
