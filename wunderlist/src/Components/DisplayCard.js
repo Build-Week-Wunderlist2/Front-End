@@ -21,6 +21,10 @@ const CardContainer = styled.div`
 
 `;
 
+const CardHeader = styled.div`
+
+`;
+
 const initialToDo = {
     title: '',
     complete: false,
@@ -41,7 +45,7 @@ const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRender
     const [taskToEdit, setTaskToEdit] = useState(initialTask);
 
     const editToDo = cards => {
-       setEditing(true);
+       setEditing(!editing);
        setToDoToEdit(cards);
     };
     const saveEdit = e => {
@@ -96,7 +100,7 @@ const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRender
     return (
     <CardContainer>
         <button key={card.title} onClick={()=>editToDo(card)}>Edit</button>
-         <button onClick={e =>{ e.stopPropagation();
+        <button onClick={e =>{ e.stopPropagation();
             deleteToDo(card)
             }
         }>Delete</button>
