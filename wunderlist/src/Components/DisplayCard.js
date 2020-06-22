@@ -22,10 +22,6 @@ const CardContainer = styled.div`
 const CardHeader = styled.div`
 `;
 
-const CardHeader = styled.div`
-
-`;
-
 const initialToDo = {
     title: '',
     complete: false,
