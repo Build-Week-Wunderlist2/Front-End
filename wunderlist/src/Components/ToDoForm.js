@@ -6,13 +6,14 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 
 const ToDoForm = ({setNewButton, renderToDo, setRenderToDo}) => {
     let date = new Date().toLocaleString().split(',')[0];
+    let userID = useParams().id;
     const initialToDo = {
         title: "",
         complete: false,
-        user_id: useParams().id,
-        date: date,
+        user_id: userID,
+        created_at: date,
     }
-
+    
     const [addToDo, setAddToDo] = useState(initialToDo);
 
     const saveToDo = e => {

@@ -51,7 +51,8 @@ const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRender
         .put(`/user/todos/${id}`, todoToEdit)
         .then(res => {
             setRenderToDo(!renderToDo)
-            this.handleReload();
+            setEditing(false)
+            // this.handleReload();
         })
         .catch(err => {
             console.error(
@@ -100,7 +101,7 @@ const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRender
             }
         }>Delete</button>
         <h2>{card.title}</h2>
-        <p>{(card.date !== null ? (card.date.split('T')[0]): undefined)}</p>
+        <p>{(card.created_at !== null ? (card.created_at.split('T')[0]): undefined)}</p>
          {editing && (
             <form onSubmit={saveEdit}>
                 <legend>Edit To Do</legend>
