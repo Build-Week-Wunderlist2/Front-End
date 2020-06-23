@@ -112,9 +112,8 @@ const Wunderlist = () => {
     }
     return (
         <MainContainer>
-            <button style={{width: '25%', height: '4.5vh', fontSize: '1.5rem'}} onClick={() => {getUserToDo(userID)}}>test for get todos list</button>
-            <button style={{width: '25%', height: '4.5vh', fontSize: '1.5rem'}} onClick={() => {getUserTaskList(userID)}}>test for get task list</button>
-            <button style={{width: '25%', height: '4.5vh', fontSize: '1.5rem'}} onClick={() => {PostUserTask()}}>post task</button>
+            {/* <button style={{width: '25%', height: '4.5vh', fontSize: '1.5rem'}} onClick={() => {getUserToDo(userID)}}>test for get todos list</button>
+            <button style={{width: '25%', height: '4.5vh', fontSize: '1.5rem'}} onClick={() => {getUserTaskList(userID)}}>test for get task list</button> */}
 
             <CardHeading>
                 <h1>Welcome to Wunderlist 2.0</h1>
