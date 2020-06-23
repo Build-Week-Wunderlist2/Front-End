@@ -354,9 +354,8 @@ html {
   background: #EFE2BA;
 }
 
-body {
+body, button {
       font-family: 'Alegreya', serif;
-      font-size: 62.5%;
 }
 
 code {
