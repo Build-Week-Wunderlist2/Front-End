@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 
-const TaskForm = ({id   }) => {
+const TaskForm = ({ id, renderToDo, setRenderToDo }) => {
     let date = new Date().toLocaleString().split(',')[0];
 
     const initialTask = {
@@ -31,7 +31,7 @@ const TaskForm = ({id   }) => {
 
     const handleChange = e => {
         e.preventDefault();
-       setAddTask({...addTask, [e.target.name]: (type==="checkbox" ? e.target.checked : e.target.value)});
+       setAddTask({...addTask, [e.target.name]: (e.target.type==="checkbox" ? e.target.checked : e.target.value)});
         }
 
      return(
