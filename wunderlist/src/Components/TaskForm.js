@@ -8,19 +8,19 @@ const TaskForm = ({id, setRenderToDo, renderToDo, setNewButton}) => {
     const initialTask = {
        description: "", 
        complete: false,
-       date: date,
+       created_at: date,
        task_id: id,
       }
 
     const [addTask, setAddTask] = useState(initialTask);
 
     const saveTask = e => {
+    e.stopPropagation();
     e.preventDefault();
     axiosWithAuth()
-        .post(`/user/task/`, addTask)
+        .post('/user/task', addTask)
         .then(res => {
-           setRenderToDo(!renderToDo);
-           setNewButton(false);
+            console.log(addTask);
         })
         .catch(err => console.error(err.message, err.respsonse))
 }

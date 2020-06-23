@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import TaskForm from './ToDoForm';
+import TaskForm from './TaskForm';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import {DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple} from '../ColorPalette'
 // import EditTitleForm from './EditTitleForm'
