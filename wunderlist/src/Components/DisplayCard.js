@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import TaskForm from './TaskForm';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import {DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple} from '../ColorPalette'
-// import EditTitleForm from './EditTitleForm'
+import EditTitleForm from './EditTitleForm'
 
 const CardContainer = styled.div`
     display: flex;
@@ -32,6 +32,7 @@ const CardHeader = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 1%;
+
     h2 {
         display: flex;
         align-items: center;
@@ -127,7 +128,7 @@ const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRender
     <CardContainer>
         <CardHeader>
             <CardButton button="edit" onClick={()=>editToDo(card)} />
-            {/* {(editing === true ? <EditTitleForm editing={editing} setEditing={setEditing} saveEdit={saveEdit} todoToEdit={todoToEdit} setToDoToEdit={setToDoToEdit}/> : <h2>{card.title}</h2>)} */}
+            {(editing === true ? <EditTitleForm editing={editing} setEditing={setEditing} saveEdit={saveEdit} todoToEdit={todoToEdit} setToDoToEdit={setToDoToEdit}/> : <h2>{card.title}</h2>)}
             <p>{(card.created_at !== null ? (card.created_at.split('T')[0]): undefined)}</p>
             <CardButton button="delete" onClick={e =>{
                 e.stopPropagation();
