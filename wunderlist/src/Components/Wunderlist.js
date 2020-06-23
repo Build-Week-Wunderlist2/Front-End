@@ -42,7 +42,14 @@ const ContentContainer = styled.div`
 `;
 
 const ContentAddToDo = styled.button`
-
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 1.8rem;
+    width: 20%;
+    border-radius: 10px;
+    background: ${LightPurple};
+    font-size: 1.3rem;
 `;
 
 
@@ -103,7 +110,7 @@ const Wunderlist = () => {
             <ContentContainer >
                 {(newButton === true
                 ? <ToDoForm setRenderToDo={setRenderToDo} setNewButton={setNewButton} renderToDo={renderToDo} />
-                : <button onClick={() => setNewButton(!newButton)}>Add List</button>)}
+                : <ContentAddToDo onClick={() => setNewButton(!newButton)}>Add List</ContentAddToDo>)}
             </ContentContainer>
             <SearchInput  name='Search' placeholder='Search For Task Name' onChange={handleSearch}/>
             <ContentContainer >

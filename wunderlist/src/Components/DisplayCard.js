@@ -16,12 +16,13 @@ const CardContainer = styled.div`
     min-width: 30%;
     background: ${LightPurple};
     box-shadow: 2px 2px 3px 3px ${DarkPurple};
+    border-radius: 5px;
     
 
     p {
         display: flex;
         align-items: center;
-        font-size: .8rem;
+        font-size: 1.4rem;
         width: 20%;
         padding: 1%;
         margin: 1%;
@@ -43,8 +44,8 @@ const CardHeader = styled.div`
 `;
 
 const CardButton = styled.button`
-    height: ${props => props.button === "edit" ? '10%' : '2.5%'};
-    width: ${props => props.button === "edit" ? undefined : '2.5%'};
+    height: ${props => props.button === "edit" ? '25px' : '15px'};
+    width: ${props => props.button === "edit" ? '25px' : '15px'};
     cursor: ${props => props.button === "edit" ? 'pointer' : "crosshair"};
     align-self: ${props => props.button === "delete" ? 'flex-start' : 'center'};
     background-color: ${props => props.button === "edit" ? DarkGold : BurntOrange};
