@@ -6,6 +6,7 @@ import {DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple} from '../Color
 import EditTitleForm from './EditTitleForm';
 import DisplayList from './DisplayList';
 
+
 const CardContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -32,6 +33,7 @@ const CardHeader = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 1%;
+
     h2 {
         display: flex;
         align-items: center;
