@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 
-const TaskForm = ({id   }) => {
+const TaskForm = ({id, setRenderToDo, renderToDo}) => {
     let date = new Date().toLocaleString().split(',')[0];
 
     const initialTask = {
