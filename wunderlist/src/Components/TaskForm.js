@@ -31,7 +31,7 @@ const TaskForm = ({id   }) => {
 
     const handleChange = e => {
         e.preventDefault();
-       setAddTask({...addTask, [e.target.name]: {type==="checkbox" ? e.target.checked : e.target.value});
+       setAddTask({...addTask, [e.target.name]: (type==="checkbox" ? e.target.checked : e.target.value)});
         }
 
      return(
