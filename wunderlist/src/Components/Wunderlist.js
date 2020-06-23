@@ -62,7 +62,20 @@ const getUserToDo = (id) => {
     })
 }
 const getUserTaskList = (id) => {
-    axiosWithAuth().get(`/user/${id}/task`).then(res => {
+    axiosWithAuth().get(`/user/33/task`).then(res => {
+        console.log(res)
+    }).catch(err => {
+        console.log(err)
+    })
+}
+
+const testing = {
+    description: 'hello and hello',
+    task_id: 33
+}
+
+const PostUserTask = (id) => {
+    axiosWithAuth().post(`/user/task`, testing).then(res => {
         console.log(res)
     }).catch(err => {
         console.log(err)
@@ -103,6 +116,7 @@ const Wunderlist = () => {
         <MainContainer>
             <button style={{width: '25%', height: '4.5vh', fontSize: '1.5rem'}} onClick={() => {getUserToDo(userID)}}>test for get todos list</button>
             <button style={{width: '25%', height: '4.5vh', fontSize: '1.5rem'}} onClick={() => {getUserTaskList(userID)}}>test for get task list</button>
+            <button style={{width: '25%', height: '4.5vh', fontSize: '1.5rem'}} onClick={() => {PostUserTask()}}>post task</button>
             <CardHeading>
                 <h1>Welcome to Wunderlist 2.0</h1>
                 <p>Please click on 'Add List' to get started.</p>
