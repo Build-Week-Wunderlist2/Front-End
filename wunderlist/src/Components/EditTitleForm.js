@@ -11,7 +11,6 @@ const EditTitle = styled.form`
     input {
         background: none;
         border: 1px solid ${DarkGold};
-
     }
 `;
 

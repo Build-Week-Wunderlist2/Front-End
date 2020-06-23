@@ -6,6 +6,8 @@ import {DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple} from '../Color
 import EditTitleForm from './EditTitleForm';
 import DisplayList from './DisplayList';
 
+
+
 const CardContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -72,7 +74,7 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
     const [taskToEdit, setTaskToEdit] = useState(initialTask);
     const [task, setTask ] = useState(false);
 
-    useEffect( () => {
+  useEffect( () => {
         axiosWithAuth().get(`/user/${id}/task`).then(res => {
             setTask(res.data.sort((a, b) => (a.id > b.id) ? -1 : 1))
         }).catch(err => {
@@ -113,7 +115,7 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
     };
 
         const deleteToDo = () => {
-    //    type==='todo' ?
+       type==='todo' ?
          axiosWithAuth()
         .delete(`user/todos/${id}`)
         .then(res => {
@@ -125,18 +127,18 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
                 err.message,
                 err.response
             );
-        }) 
-        // : axiosWithAuth()
-        // .delete(`user/:id/task`)
-        // .then(res => {
-        //     setTaskToEdit(res.data);
-        // })
-        // .catch(err => { 
-        //     console.error(
-        //     err.message
-        //    );
-        };
-   
+        }) : axiosWithAuth()
+        .delete(`user/:id/task`)
+        .then(res => {
+            setTaskToEdit(res.data);
+        })
+        .catch(err => { 
+            console.error(
+            err.message
+           );
+        });
+    }
+        
     return (
     <CardContainer>
         <CardHeader>
