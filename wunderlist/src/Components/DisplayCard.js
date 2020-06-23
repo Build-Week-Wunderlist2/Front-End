@@ -1,24 +1,54 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import TaskForm from './ToDoForm';
 import axiosWithAuth from '../utils/axiosWithAuth';
-import TaskForm from './TaskForm';
+import {DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple} from '../ColorPalette'
+// import EditTitleForm from './EditTitleForm'
 
 const CardContainer = styled.div`
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 1%;
     height: 100%;
     min-width: 30%;
-    border: 2px solid red;
+    background: ${LightPurple};
+    box-shadow: 2px 2px 3px 3px ${DarkPurple};
+    border-radius: 5px;
+    
     p {
-        width: 10%;
+        display: flex;
+        align-items: center;
+        font-size: 1.4rem;
+        width: 20%;
         padding: 1%;
         margin: 1%;
     }
 `;
 
 const CardHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin: 1%;
+    h2 {
+        display: flex;
+        align-items: center;
+        margin: 0 1%;
+        min-height: 3rem;
+    }
+`;
+
+const CardButton = styled.button`
+    height: ${props => props.button === "edit" ? '25px' : '15px'};
+    width: ${props => props.button === "edit" ? '25px' : '15px'};
+    cursor: ${props => props.button === "edit" ? 'pointer' : "crosshair"};
+    align-self: ${props => props.button === "delete" ? 'flex-start' : 'center'};
+    background-color: ${props => props.button === "edit" ? DarkGold : BurntOrange};
+    clip-path: ${props => props.button === "edit"
+    ? 'polygon(92% 12%, 11% 10%, 10% 89%, 83% 91%, 35% 72%, 35% 59%, 78% 57%, 75% 42%, 41% 42%, 43% 26%, 88% 26%)'
+    : 'polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%)'};
 `;
 
 const initialToDo = {
@@ -36,7 +66,6 @@ const initialTask = {
 
 
 const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRenderToDo }) => {
-    // const todoID = useParams().id;
     const [editing, setEditing] = useState(false);
     const [todoToEdit, setToDoToEdit] = useState(initialToDo);
     const [taskToEdit, setTaskToEdit] = useState(initialTask);
@@ -96,46 +125,17 @@ const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRender
    
     return (
     <CardContainer>
-        <button key={card.title} onClick={()=>editToDo(card)}>Edit</button>
-        <button onClick={e =>{ e.stopPropagation();
-            deleteToDo(card)
-            }
-        }>Delete</button>
-        <h2>{card.title}</h2>
-        <p>{(card.created_at !== null ? (card.created_at.split('T')[0]): undefined)}</p>
-         {editing && (
-            <form onSubmit={saveEdit}>
-                <legend>Edit To Do</legend>
-                <label>
-                    To Do
-                    <input
-                    onChange={e=>
-                    setToDoToEdit({...todoToEdit, title: e.target.value})
+        <CardHeader>
+            <CardButton button="edit" onClick={()=>editToDo(card)} />
+            {/* {(editing === true ? <EditTitleForm editing={editing} setEditing={setEditing} saveEdit={saveEdit} todoToEdit={todoToEdit} setToDoToEdit={setToDoToEdit}/> : <h2>{card.title}</h2>)} */}
+            <p>{(card.created_at !== null ? (card.created_at.split('T')[0]): undefined)}</p>
+            <CardButton button="delete" onClick={e =>{
+                e.stopPropagation();
+                deleteToDo(card)
                 }
-                value = {
-                    todoToEdit.title
-                }
-                />
-                </label>
-        
-        
-        {/* : editing && ( 
-        <form onSubmit ={saveEdit}>
-            <legend>Edit Task</legend>
-            <label>Task:
-                <input onChange ={e=>setEditTask({...editToDo,description: e.target.value})
-                }
-                value={editToDo.description}
-                />
-            </label>
-        </form>
-        )} */}
-        {/* <ToDoForm updateTodo={updateToDo}/> */}
-            <button type="submit">save</button>
-            <button onClick={()=>setEditing(false)}>cancel</button>
-        </form>
-        )}
-    <TaskForm />
+            }/>
+        </CardHeader>
+        <TaskForm id={id} setRenderToDo={setRenderToDo} />
     </CardContainer>
     )}
 

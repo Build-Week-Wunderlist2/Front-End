@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom'
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 
-const TaskForm = (props) => {
+const TaskForm = ({id, setRenderToDo, renderToDo, setNewButton}) => {
     let date = new Date().toLocaleString().split(',')[0];
-    let todoID = useParams().id;
 
     const initialTask = {
        description: "", 
        complete: false,
-       task_id: todoID,
-       created_at: date,
-    }
+       date: date,
+       task_id: id,
+      }
 
     const [addTask, setAddTask] = useState(initialTask);
 
@@ -21,7 +19,8 @@ const TaskForm = (props) => {
     axiosWithAuth()
         .post(`/user/task/`, addTask)
         .then(res => {
-            console.log(res.data);
+           setRenderToDo(!renderToDo);
+           setNewButton(false);
         })
         .catch(err => console.error(err.message, err.respsonse))
 }
@@ -36,7 +35,7 @@ const TaskForm = (props) => {
      return(
         <>
         <form onSubmit={saveTask}>
-            <input name='title' onChange={handleChange} value={addTask.value} placeholder='Name of Task'/>
+            <input name='description' onChange={handleChange} value={addTask.value} placeholder='Name of Task'/>
             <button type="submit">Add</button>
         </form>
         </>
