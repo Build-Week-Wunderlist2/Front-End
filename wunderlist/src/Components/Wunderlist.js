@@ -4,6 +4,7 @@ import axiosWithAuth from '../utils/axiosWithAuth'
 import ToDoForm from './ToDoForm'
 import styled from 'styled-components';
 import DisplayCard from './DisplayCard'
+import {DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple} from '../ColorPalette'
 
 
 const MainContainer = styled.div`
@@ -26,6 +27,7 @@ const CardHeading = styled.div`
 
     h1 {
         font-size: 2.4rem;
+        text-shadow: 2px 2px ${DarkGold};
     }
 
     p {
@@ -37,6 +39,10 @@ const ContentContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+`;
+
+const ContentAddToDo = styled.button`
+
 `;
 
 
@@ -88,15 +94,16 @@ const Wunderlist = () => {
     }
     return (
         <MainContainer>
-            <button style={{width: '25%', height: '3vh', fontSize: '1.5rem'}} onClick={() => {getUserToDo(userID)}}>test for get todos list</button>
-            <button style={{width: '25%', height: '3vh', fontSize: '1.5rem'}} onClick={() => {getUserTaskList(userID)}}>test for get task list</button>
+            <button style={{width: '25%', height: '4.5vh', fontSize: '1.5rem'}} onClick={() => {getUserToDo(userID)}}>test for get todos list</button>
+            <button style={{width: '25%', height: '4.5vh', fontSize: '1.5rem'}} onClick={() => {getUserTaskList(userID)}}>test for get task list</button>
             <CardHeading>
                 <h1>Welcome to Wunderlist 2.0</h1>
                 <p>Please click on 'Add List' to get started.</p>
             </CardHeading>
             <ContentContainer >
-                <button onClick={() => setNewButton(!newButton)}>Add List</button>
-                {(newButton === true ? <ToDoForm setRenderToDo={setRenderToDo} setNewButton={setNewButton} renderToDo={renderToDo} /> : undefined)}
+                {(newButton === true
+                ? <ToDoForm setRenderToDo={setRenderToDo} setNewButton={setNewButton} renderToDo={renderToDo} />
+                : <button onClick={() => setNewButton(!newButton)}>Add List</button>)}
             </ContentContainer>
             <SearchInput  name='Search' placeholder='Search For Task Name' onChange={handleSearch}/>
             <ContentContainer >
