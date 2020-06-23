@@ -7,6 +7,7 @@ import EditTitleForm from './EditTitleForm';
 import DisplayList from './DisplayList';
 
 
+
 const CardContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -73,7 +74,7 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
     const [taskToEdit, setTaskToEdit] = useState(initialTask);
     const [task, setTask ] = useState(false);
 
-    useEffect( () => {
+  useEffect( () => {
         axiosWithAuth().get(`/user/${id}/task`).then(res => {
             setTask(res.data.sort((a, b) => (a.id > b.id) ? -1 : 1))
         }).catch(err => {
