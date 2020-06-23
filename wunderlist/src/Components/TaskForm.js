@@ -20,11 +20,12 @@ const TaskForm = ({id, setRenderToDo, renderToDo, setNewButton}) => {
     axiosWithAuth()
         .post('/user/task', addTask)
         .then(res => {
-            console.log(addTask);
+            // console.log('taskform addtask', addTask);
+            setRenderToDo(!renderToDo)
+            setAddTask(initialTask)
         })
         .catch(err => console.error(err.message, err.respsonse))
 }
-
 
     const handleChange = e => {
         e.persist()
@@ -35,7 +36,7 @@ const TaskForm = ({id, setRenderToDo, renderToDo, setNewButton}) => {
      return(
         <>
         <form onSubmit={saveTask}>
-            <input name='description' onChange={handleChange} value={addTask.value} placeholder='Name of Task'/>
+            <input name='description' onChange={handleChange} value={addTask.description} placeholder='Name of Task'/>
             <button type="submit">Add</button>
         </form>
         </>

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import TaskForm from './TaskForm';
 import axiosWithAuth from '../utils/axiosWithAuth';
-import {DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple} from '../ColorPalette'
-import EditTitleForm from './EditTitleForm'
+import {DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple} from '../ColorPalette';
+import EditTitleForm from './EditTitleForm';
+import DisplayList from './DisplayList';
 
 const CardContainer = styled.div`
     display: flex;
@@ -66,11 +66,24 @@ const initialTask = {
 };
 
 
-const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRenderToDo }) => {
+const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
     const [editing, setEditing] = useState(false);
     const [todoToEdit, setToDoToEdit] = useState(initialToDo);
     const [taskToEdit, setTaskToEdit] = useState(initialTask);
+    const [task, setTask ] = useState();
 
+    useEffect( () => {
+        axiosWithAuth().get(`/user/${id}/task`).then(res => {
+            setTask(res.data)
+        }).catch(err => {
+            console.log(err)
+        })
+        return () => {
+            return undefined
+        }
+    },[renderToDo])
+
+    // console.log(task)
     const editToDo = cards => {
        setEditing(!editing);
        setToDoToEdit(cards);
@@ -136,7 +149,10 @@ const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRender
                 }
             }/>
         </CardHeader>
-        <TaskForm id={id} setRenderToDo={setRenderToDo} />
+        {(!task ? <p>please wait</p> : task.map(obj => {
+            return <DisplayList type='task' key={obj.id} task={obj} id={obj.id}/>
+        }))}
+        <TaskForm id={id} renderToDo={renderToDo} setRenderToDo={setRenderToDo} />
     </CardContainer>
     )}
 
