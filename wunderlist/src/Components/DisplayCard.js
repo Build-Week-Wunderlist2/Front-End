@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import TaskForm from './TaskForm';
 import axiosWithAuth from '../utils/axiosWithAuth';
-import {DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple} from '../ColorPalette'
-import EditTitleForm from './EditTitleForm'
+import {DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple} from '../ColorPalette';
+import EditTitleForm from './EditTitleForm';
+import DisplayList from './DisplayList';
+
 
 const CardContainer = styled.div`
     display: flex;
@@ -66,11 +67,24 @@ const initialTask = {
 };
 
 
-const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRenderToDo }) => {
+const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
     const [editing, setEditing] = useState(false);
     const [todoToEdit, setToDoToEdit] = useState(initialToDo);
     const [taskToEdit, setTaskToEdit] = useState(initialTask);
+    const [task, setTask ] = useState(false);
 
+    useEffect( () => {
+        axiosWithAuth().get(`/user/${id}/task`).then(res => {
+            setTask(res.data.sort((a, b) => (a.id > b.id) ? -1 : 1))
+        }).catch(err => {
+            console.log(err)
+        })
+        return () => {
+            return undefined
+        }
+    },[renderToDo])
+
+    // console.log(task)
     const editToDo = cards => {
        setEditing(!editing);
        setToDoToEdit(cards);
@@ -100,7 +114,7 @@ const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRender
     };
 
         const deleteToDo = () => {
-    //    type==='todo' ?
+       type==='todo' ?
          axiosWithAuth()
         .delete(`user/todos/${id}`)
         .then(res => {
@@ -112,18 +126,18 @@ const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRender
                 err.message,
                 err.response
             );
-        }) 
-        // : axiosWithAuth()
-        // .delete(`user/:id/task`)
-        // .then(res => {
-        //     setTaskToEdit(res.data);
-        // })
-        // .catch(err => { 
-        //     console.error(
-        //     err.message
-        //    );
-        };
-   
+        }) : axiosWithAuth()
+        .delete(`user/:id/task`)
+        .then(res => {
+            setTaskToEdit(res.data);
+        })
+        .catch(err => { 
+            console.error(
+            err.message
+           );
+        });
+    }
+        
     return (
     <CardContainer>
         <CardHeader>
@@ -136,7 +150,10 @@ const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRender
                 }
             }/>
         </CardHeader>
-        <TaskForm id={id} setRenderToDo={setRenderToDo} />
+        {(!task ? <p>please wait</p> : task.map(obj => {
+            return <DisplayList type='task' key={obj.id} task={obj} id={obj.id} renderToDo={renderToDo} setRenderToDo={setRenderToDo}/>
+        }))}
+        <TaskForm id={id} renderToDo={renderToDo} setRenderToDo={setRenderToDo} userID={userID}/>
     </CardContainer>
     )}
 
