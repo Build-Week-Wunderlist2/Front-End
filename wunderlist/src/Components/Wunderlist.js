@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 import axiosWithAuth from '../utils/axiosWithAuth'
 import ToDoForm from './ToDoForm'
 import styled from 'styled-components';
-import DisplayCard from './DisplayCard'
-
+import DisplayCard from './DisplayCard';
 
 const MainContainer = styled.div`
     height: 100vh;
@@ -103,7 +102,7 @@ const Wunderlist = () => {
                 : searchResult.map(obj => {
                     return <DisplayCard type='todo' key={obj.id} id={obj.id} card={obj} userID={userID} setRenderToDo={setRenderToDo} renderToDo={renderToDo}/> 
                 })}
-            </ContentContainer>
+             </ContentContainer>
 
         </MainContainer>
     )

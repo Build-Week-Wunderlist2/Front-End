@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import ToDoForm from './ToDoForm';
 import axiosWithAuth from '../utils/axiosWithAuth';
+import TaskForm from './TaskForm';
 
 const CardContainer = styled.div`
     display: flex;
@@ -37,6 +36,7 @@ const initialTask = {
 
 
 const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRenderToDo }) => {
+    // const todoID = useParams().id;
     const [editing, setEditing] = useState(false);
     const [todoToEdit, setToDoToEdit] = useState(initialToDo);
     const [taskToEdit, setTaskToEdit] = useState(initialTask);
@@ -135,7 +135,7 @@ const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRender
             <button onClick={()=>setEditing(false)}>cancel</button>
         </form>
         )}
-    <ToDoForm updateToDo={updateToDo} />
+    <TaskForm />
     </CardContainer>
     )}
 
