@@ -139,7 +139,7 @@ const LoginForm = ({type}) => {
          axiosWithAuth()
         .post('/auth/register', formData)
         .then(res=>{
-            console.log(res);
+           history.push('/login');
         })
         .catch(err=>{
             console.error(err.message);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import ToDoForm from './ToDoForm';
+import TaskForm from './TaskForm';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import {DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple} from '../ColorPalette'
 import EditTitleForm from './EditTitleForm'
@@ -18,7 +18,6 @@ const CardContainer = styled.div`
     box-shadow: 2px 2px 3px 3px ${DarkPurple};
     border-radius: 5px;
     
-
     p {
         display: flex;
         align-items: center;
@@ -27,7 +26,6 @@ const CardContainer = styled.div`
         padding: 1%;
         margin: 1%;
     }
-
 `;
 
 const CardHeader = styled.div`
@@ -138,7 +136,7 @@ const DisplayCard = ({ card, type, updateToDo, userID, id, renderToDo, setRender
                 }
             }/>
         </CardHeader>
-        <ToDoForm updateToDo={updateToDo} />
+        <TaskForm id={id} setRenderToDo={setRenderToDo} />
     </CardContainer>
     )}
 

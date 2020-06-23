@@ -55,7 +55,8 @@ const ToDoForm = ({setNewButton, renderToDo, setRenderToDo}) => {
             <ToDoFormButton type="submit">Add</ToDoFormButton>
         </form>
         </>
-    )
+
+     )
 
 }
 
