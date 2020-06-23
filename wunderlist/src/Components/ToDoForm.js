@@ -37,13 +37,14 @@ const ToDoForm = ({setNewButton, renderToDo, setRenderToDo}) => {
 
 
     return(
-        <>
+        <>   
         <form onSubmit={saveToDo}>
-            <input name='title' onChange={handleChange} value={addToDo.something} placeholder='Name of Task'/>
+            <input name='title' onChange={handleChange} value={addToDo.value} placeholder='Name of To Do'/>
             <button type="submit">Add</button>
         </form>
         </>
-    )
+
+     )
 
 }
 
