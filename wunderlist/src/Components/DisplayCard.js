@@ -70,11 +70,11 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
     const [editing, setEditing] = useState(false);
     const [todoToEdit, setToDoToEdit] = useState(initialToDo);
     const [taskToEdit, setTaskToEdit] = useState(initialTask);
-    const [task, setTask ] = useState();
+    const [task, setTask ] = useState(false);
 
     useEffect( () => {
         axiosWithAuth().get(`/user/${id}/task`).then(res => {
-            setTask(res.data)
+            setTask(res.data.sort((a, b) => (a.id > b.id) ? -1 : 1))
         }).catch(err => {
             console.log(err)
         })
@@ -150,9 +150,9 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
             }/>
         </CardHeader>
         {(!task ? <p>please wait</p> : task.map(obj => {
-            return <DisplayList type='task' key={obj.id} task={obj} id={obj.id}/>
+            return <DisplayList type='task' key={obj.id} task={obj} id={obj.id} renderToDo={renderToDo} setRenderToDo={setRenderToDo}/>
         }))}
-        <TaskForm id={id} renderToDo={renderToDo} setRenderToDo={setRenderToDo} />
+        <TaskForm id={id} renderToDo={renderToDo} setRenderToDo={setRenderToDo} userID={userID}/>
     </CardContainer>
     )}
 
