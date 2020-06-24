@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth'
 import EditTaskForm from './EditTaskForm';
 
@@ -10,11 +10,7 @@ const DisplayList = ({task, id, setRenderToDo, renderToDo}) => {
         id: task.id,
         description: task.description,
         complete: task.complete,
-        created_at: task.created_at,
         task_id: task.task_id,
-        repeatsDaily: task.repeatsDaily,
-        repeatsWeekly: task.repeatsWeekly,
-        repeatsMonthly: task.repeatsMonthly
     }
 
     const [editing, setEditing] = useState(false);
@@ -34,7 +30,7 @@ const DisplayList = ({task, id, setRenderToDo, renderToDo}) => {
         .then(res => {
             setRenderToDo(!renderToDo)
             setEditing(false)
-            console.log(res)
+            console.log(taskToEdit)
         })
         .catch(err=> {
             console.error(err.message, err.response)
@@ -61,8 +57,9 @@ const DisplayList = ({task, id, setRenderToDo, renderToDo}) => {
     // console.log('my new task', newTask)
     return (
         <>
+        {(editing === true ? <EditTaskForm editing={editing} setEditing={setEditing} updateTask={updateTask} taskToEdit={taskToEdit} setTaskToEdit={setTaskToEdit} task={task}/> : <h3>{task.description}</h3>
+      )}
         <button button="edit" onClick={()=>editTask(task)} />
-        {(editing === true ? <EditTaskForm editing={editing} setEditing={setEditing} updateTask={updateTask} taskToEdit={taskToEdit} setTaskToEdit={setTaskToEdit}/> : <h3>{task.description}</h3>)}
         <button button="delete" onClick={e=>{
             e.stopPropagation();
             deleteTask(task);

@@ -1,12 +1,12 @@
 import React from 'react';
 
-const EditTaskForm = ({taskToEdit, saveTask, editing, setTaskToEdit, setEditing}) => {
+const EditTaskForm = ({taskToEdit, updateTask, editing, setTaskToEdit, setEditing}) => {
     return (<>
         {editing && (
-            <form onSubmit={saveTask}>
+            <form onSubmit={updateTask}>
                 <label>
                     <input onChange={e=>
-                    setTaskToEdit({...taskToEdit, description:e.target.value})}
+                    setTaskToEdit({...taskToEdit, description: e.target.value})}
                     value= {taskToEdit.description}
                     />
                 </label>
