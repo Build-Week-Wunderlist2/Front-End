@@ -7,11 +7,13 @@ import EditTaskForm from './EditTaskForm';
 const DisplayList = ({task, id, setRenderToDo, renderToDo}) => {
 
     let updatedTask = {
-        id: task.id,
+        id: id,
         description: task.description,
         complete: task.complete,
-        task_id: task.task_id,
-    }
+        repeatsDaily: task.repeatsDaily,
+        repeatsWeekly: task.repeatsWeekly,
+        repeatsMonthly: task.repeatsMonthly,
+     };
 
     const [editing, setEditing] = useState(false);
     const [taskToEdit, setTaskToEdit] = useState(updatedTask);
@@ -23,16 +25,16 @@ const DisplayList = ({task, id, setRenderToDo, renderToDo}) => {
     }
 
 
-    const updateTask = e => {
+    const updateTask = (e) => {
         e.preventDefault()
         axiosWithAuth()
         .put(`/user/task/${id}`, taskToEdit)
         .then(res => {
-            setRenderToDo(!renderToDo)
-            setEditing(false)
-            console.log(taskToEdit)
+            setRenderToDo(!renderToDo);
+            setEditing(false);
         })
         .catch(err=> {
+            console.log(taskToEdit)
             console.error(err.message, err.response)
         })
     }
@@ -61,11 +63,11 @@ const DisplayList = ({task, id, setRenderToDo, renderToDo}) => {
       )}
         <button button="edit" onClick={()=>editTask(task)} />
         <button button="delete" onClick={e=>{
-            e.stopPropagation();
+            e.preventDefault();
             deleteTask(task);
         }} />
             <li>{task.complete ? "I am completed" : "I am not completed"}</li>
-            <li>{task.repeatsDaily === true ? "This will run daily" : ""}</li>
+            <li>{task.repeatsDaily === true ? "This will run daily" : task.repeatsWeekly === true ? "This will run Weekly" : task.repeatsMonthly === true ? "This will run Monthly" : "" }</li>
             <label>
             <input onChange={handleChange} name="complete" type="checkbox"></input>
                 complete state

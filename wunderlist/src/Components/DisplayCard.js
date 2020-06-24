@@ -54,18 +54,9 @@ const CardButton = styled.button`
 `;
 
 const initialToDo = {
-    title: '',
+    title: "",
     complete: false,
 };
-
-const initialTask = {
-    description: '',
-    complete: false,
-    repeatsDaily: false,
-    repeatsWeekly: false,
-    repeatsMonthly: false
-};
-
 
 const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
     const [editing, setEditing] = useState(false);

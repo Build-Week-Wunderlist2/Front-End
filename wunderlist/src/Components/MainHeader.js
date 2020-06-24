@@ -18,7 +18,7 @@ const MainHeader = ({type}) => {
     let path = (type === 'signup' || type === 'login' ? '/' : `/wunderlist/${userID}`)
     return (
         <MainHeading >
-            <Link to={path}>Wonderlist 2.0</Link>
+            <Link to={path}>Wunderlist 2.0</Link>
         </MainHeading>
     )
 }

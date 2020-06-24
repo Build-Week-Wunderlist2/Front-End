@@ -6,13 +6,13 @@ const TaskForm = ({ id, renderToDo, setRenderToDo }) => {
     let date = new Date().toLocaleString().split(',')[0];
 
     const initialTask = {
-       description: "", 
-       complete: false,
-       created_at: date,
        task_id: id,
+       description: "",
+       complete: false, 
        repeatsDaily: false,
        repeatsWeekly: false,
-       repeatsMonthly: false
+       repeatsMonthly: false,
+       created_at: date,
     }
 
     const [addTask, setAddTask] = useState(initialTask);
