@@ -23,7 +23,7 @@ const DisplayListHeader = styled.h3`
 
 
 const DisplayList = ({task, id, setRenderToDo, renderToDo }) => {
-   
+//    console.log(task)
     return (
         <DisplayListContainer complete={task.complete}>
             <DisplayListHeader>{task.description}</DisplayListHeader>
