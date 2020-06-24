@@ -89,7 +89,7 @@ const DisplayList = ({task, id, setRenderToDo, renderToDo}) => {
         <button button="delete" onClick={e=>{
             e.preventDefault();
             deleteTask(task);
-        }
+        } />
             <li>{task.repeatsDaily === true ? "This will run daily" : task.repeatsWeekly === true ? "This will run Weekly" : task.repeatsMonthly === true ? "This will run Monthly" : "" }</li>
         </>            
 
