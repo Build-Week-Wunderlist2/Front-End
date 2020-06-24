@@ -66,6 +66,7 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
   useEffect( () => {
         axiosWithAuth().get(`/user/${id}/task`).then(res => {
             setTask(res.data.sort((a, b) => (a.id > b.id) ? -1 : 1))
+            console.log(res)
         }).catch(err => {
             console.log(err)
         })
@@ -109,6 +110,7 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
                 err.response
             );
         }); 
+
     }
         
     return (

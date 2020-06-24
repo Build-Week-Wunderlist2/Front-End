@@ -1,7 +1,27 @@
+
 import React, { useState } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth'
 import EditTaskForm from './EditTaskForm';
+import Switch from './Switch';
+import styled from 'styled-components';
+import {DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple} from '../ColorPalette'
 
+
+const completeBackground = 'rgba(64, 86, 161, .3)';
+
+const DisplayListContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: ${({complete}) => complete ? completeBackground : undefined};
+    margin: 1%;
+    border-radius: 15px;
+    max-height: 2em;
+`;
+
+const DisplayListHeader = styled.h3`
+    margin-left: 1%;
+`;
 
 
 const DisplayList = ({task, id, setRenderToDo, renderToDo}) => {
@@ -59,22 +79,20 @@ const DisplayList = ({task, id, setRenderToDo, renderToDo}) => {
     // console.log('my new task', newTask)
     return (
         <>
+        <DisplayListContainer complete={task.complete}>
+            <DisplayListHeader>{task.description}</DisplayListHeader>
+            <Switch task={task} id={id} setRenderToDo={setRenderToDo} renderToDo={renderToDo}/>
+        </DisplayListContainer>
         {(editing === true ? <EditTaskForm editing={editing} setEditing={setEditing} updateTask={updateTask} taskToEdit={taskToEdit} setTaskToEdit={setTaskToEdit} task={task}/> : <h3>{task.description}</h3>
       )}
         <button button="edit" onClick={()=>editTask(task)} />
         <button button="delete" onClick={e=>{
             e.preventDefault();
             deleteTask(task);
-        }} />
-            <li>{task.complete ? "I am completed" : "I am not completed"}</li>
+        }
             <li>{task.repeatsDaily === true ? "This will run daily" : task.repeatsWeekly === true ? "This will run Weekly" : task.repeatsMonthly === true ? "This will run Monthly" : "" }</li>
-            <label>
-            <input onChange={handleChange} name="complete" type="checkbox"></input>
-                complete state
-            </label>
-            
- 
-        </>
+        </>            
+
     )
 }
 
