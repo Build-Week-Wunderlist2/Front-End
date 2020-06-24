@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 
-
 const TaskForm = ({ id, renderToDo, setRenderToDo }) => {
     let date = new Date().toLocaleString().split(',')[0];
 
@@ -23,16 +22,16 @@ const TaskForm = ({ id, renderToDo, setRenderToDo }) => {
      axiosWithAuth()
         .post('/user/task', addTask)
         .then(res => {
-            console.log(addTask)
+            console.log('taskform addtask', addTask);
             setRenderToDo(!renderToDo)
             setAddTask(initialTask)
         })
         .catch(err => console.error(err.message, err.response))
 }
 
-    const handleChange = e => {
+     const handleChange = e => {
         e.preventDefault();
-       setAddTask({...addTask, [e.target.name]: (e.target.type === "checkbox" ? e.target.checked : e.target.value)});
+       setAddTask({...addTask, [e.target.name]: (e.target.type==="checkbox" ? e.target.checked : e.target.value)});
         }
 
      return(

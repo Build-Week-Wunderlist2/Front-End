@@ -34,7 +34,6 @@ const CardHeader = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 1%;
-
     h2 {
         display: flex;
         align-items: center;
@@ -71,7 +70,6 @@ const initialTask = {
 const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
     const [editing, setEditing] = useState(false);
     const [todoToEdit, setToDoToEdit] = useState(initialToDo);
-    const [taskToEdit, setTaskToEdit] = useState(initialTask);
     const [task, setTask ] = useState(false);
 
   useEffect( () => {
@@ -92,7 +90,6 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
     };
     const saveEdit = e => {
         e.preventDefault();
-        type === 'todo' ? 
         axiosWithAuth()
         .put(`/user/todos/${id}`, todoToEdit)
         .then(res => {
@@ -105,17 +102,10 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
                 err.message,
                 err.response
             );
-        }) : axiosWithAuth()
-        .put(`/user/task/${userID}`, taskToEdit)
-        .then(res => {
-            this.handleReload();
-        })
-        .catch(err => console.error(err.message));
-        
+        }) 
     };
 
         const deleteToDo = () => {
-       type==='todo' ?
          axiosWithAuth()
         .delete(`user/todos/${id}`)
         .then(res => {
@@ -127,16 +117,7 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
                 err.message,
                 err.response
             );
-        }) : axiosWithAuth()
-        .delete(`user/:id/task`)
-        .then(res => {
-            setTaskToEdit(res.data);
-        })
-        .catch(err => { 
-            console.error(
-            err.message
-           );
-        });
+        }); 
     }
         
     return (
