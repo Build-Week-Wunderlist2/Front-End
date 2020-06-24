@@ -28,18 +28,6 @@ const EditTitleForm = ({todoToEdit, saveEdit, editing, setToDoToEdit, setEditing
                 }
                 />
                 </label>
-        {/* : editing && ( 
-        <form onSubmit ={saveEdit}>
-            <legend>Edit Task</legend>
-            <label>Task:
-                <input onChange ={e=>setEditTask({...editToDo,description: e.target.value})
-                }
-                value={editToDo.description}
-                />
-            </label>
-        </form>
-        )} */}
-        {/* <ToDoForm updateTodo={updateToDo}/> */}
             <button type="submit">save</button>
             <button onClick={()=>setEditing(false)}>cancel</button>
         </EditTitle>

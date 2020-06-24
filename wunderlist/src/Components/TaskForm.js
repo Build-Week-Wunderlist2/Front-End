@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 
@@ -6,13 +6,13 @@ const TaskForm = ({ id, renderToDo, setRenderToDo }) => {
     let date = new Date().toLocaleString().split(',')[0];
 
     const initialTask = {
-       description: "", 
-       complete: false,
-       created_at: date,
        task_id: id,
+       description: "",
+       complete: false, 
        repeatsDaily: false,
        repeatsWeekly: false,
-       repeatsMonthly: false
+       repeatsMonthly: false,
+       created_at: date,
     }
 
     const [addTask, setAddTask] = useState(initialTask);
@@ -22,17 +22,18 @@ const TaskForm = ({ id, renderToDo, setRenderToDo }) => {
      axiosWithAuth()
         .post('/user/task', addTask)
         .then(res => {
-            // console.log('taskform addtask', addTask);
+            console.log('taskform addtask', addTask);
             setRenderToDo(!renderToDo)
             setAddTask(initialTask)
             console.log('my add task', addTask)
         })
         .catch(err => console.error(err.message, err.response))
-    }
-    
-    const handleChange = e => {
-       e.preventDefault();
-       setAddTask({...addTask, [e.target.name]: e.target.value});
+
+}
+
+     const handleChange = e => {
+        e.preventDefault();
+       setAddTask({...addTask, [e.target.name]: (e.target.type==="checkbox" ? e.target.checked : e.target.value)});
         }
     
     const handleSelection = (e) => {

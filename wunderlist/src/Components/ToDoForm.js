@@ -51,7 +51,7 @@ const ToDoForm = ({setNewButton, renderToDo, setRenderToDo}) => {
     return(
         <>
         <form style={{display: 'flex', width: '30%', justifyContent: 'center',}}onSubmit={saveToDo}>
-            <ToDoFormInput name='title' onChange={handleChange} value={addToDo.something} placeholder='Name of Task'/>
+            <ToDoFormInput name='title' onChange={handleChange} value={addToDo.title} placeholder='Name of Task'/>
             <ToDoFormButton type="submit">Add</ToDoFormButton>
         </form>
         </>
