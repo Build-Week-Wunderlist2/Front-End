@@ -25,28 +25,36 @@ const TaskForm = ({ id, renderToDo, setRenderToDo }) => {
             // console.log('taskform addtask', addTask);
             setRenderToDo(!renderToDo)
             setAddTask(initialTask)
+            console.log('my add task', addTask)
         })
         .catch(err => console.error(err.message, err.response))
-}
-
+    }
+    
     const handleChange = e => {
-        e.preventDefault();
-       setAddTask({...addTask, [e.target.name]: (e.target.type==="checkbox" ? e.target.checked : e.target.value)});
+       e.preventDefault();
+       setAddTask({...addTask, [e.target.name]: e.target.value});
         }
+    
+    const handleSelection = (e) => {
+        const newSelection = e.target.value;
+        setAddTask({...addTask, [newSelection] : true});
+
+        //possibly a conditional here to set the others back to false.
+        //could also build custom component for onClicks
+        //had a ton of issues with options not passing e.target.name
+    }
+
 
      return(
         <>
         <form onSubmit={saveTask}>
-            <input name='description' onChange={handleChange} value={addTask.value} placeholder='Name of Task'/>
-            <p>{initialTask.repeatsDaily ? true : false} Repeat Daily
-            <input onChange={handleChange} name="repeatsDaily" type="checkbox"></input>
-            </p>
-            <p>{initialTask.repeatsWeekly ? true : false} Repeat Weekly
-            <input onChange={handleChange} name="repeatsWeekly" type="checkbox"></input>
-            </p>
-            <p>{initialTask.repeatsMonthly ? true : false} Repeat Monthly
-            <input onChange={handleChange} name="repeatsMonthly" type="checkbox"></input>
-            </p>
+            <input name='description' onChange={handleChange} value={addTask.description} placeholder='Name of Task'/>
+            <select onChange={(e) => handleSelection(e)}>
+                <option>Never</option>
+                <option value='repeatsDaily'>Daily</option>
+                <option value='repeatsWeekly'>Weekly</option>
+                <option value='repeatsMonthly'>Monthly</option>
+            </select>
             <button type="submit">Add</button>
         </form>
         </>

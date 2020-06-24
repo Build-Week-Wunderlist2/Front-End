@@ -1,56 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'
-import axiosWithAuth from '../utils/axiosWithAuth'
+import React from 'react';
+import Switch from './Switch';
+import styled from 'styled-components';
+import {DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple} from '../ColorPalette'
+
+const completeBackground = 'rgba(64, 86, 161, .3)';
+
+const DisplayListContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: ${({complete}) => complete ? completeBackground : undefined};
+    margin: 1%;
+    border-radius: 15px;
+    max-height: 2em;
+`;
+
+const DisplayListHeader = styled.h3`
+    margin-left: 1%;
+`;
+
 
 
 
 const DisplayList = ({task, id, setRenderToDo, renderToDo }) => {
-
-    let updatedTask = {
-        id: id,
-        description: task.description,
-        complete: task.complete,
-    }
-    const [newTask, setTask] = useState(updatedTask)
-    
-
-
-    const updateTask = () => {
-        axiosWithAuth()
-        .put(`/user/task/${id}`, newTask)
-        .then(res => {
-            setRenderToDo(!renderToDo)
-            console.log(res)
-        })
-        .catch(err=> {
-            console.log(err)
-        })
-    }
-
-    useEffect(()=> {
-        updateTask()
-
-        return undefined
-    }, [newTask])
-
-    function handleChange(e){
-        e.stopPropagation(); 
-        setTask({...newTask, [e.target.name]:e.target.checked})
-        
-    }
-    // console.log('my new task', newTask)
+   
     return (
-        <>
-        <h3>{task.description}
-            <li>{task.complete ? "I am completed" : "I am not completed"}</li>
-            <label>
-            <input onChange={handleChange} name="complete" type="checkbox"></input>
-                complete state
-            </label>
-            
-        </h3>
-        
-        </>
+        <DisplayListContainer complete={task.complete}>
+            <DisplayListHeader>{task.description}</DisplayListHeader>
+            <Switch task={task} id={id} setRenderToDo={setRenderToDo} renderToDo={renderToDo}/>
+        </DisplayListContainer>
     )
 }
 

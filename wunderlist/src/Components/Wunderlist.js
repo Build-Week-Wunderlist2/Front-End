@@ -92,7 +92,6 @@ const Wunderlist = () => {
         axiosWithAuth().get(`/user/${userID}/todos`).then(res => {
             setToDoList(res.data)
             setSearchResult(res.data.sort((a, b) => (a.id > b.id) ? -1 : 1))
-            console.log(res.data)
         }).catch(err => {
             console.log(err)
         })
