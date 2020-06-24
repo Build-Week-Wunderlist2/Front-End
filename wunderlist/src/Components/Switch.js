@@ -57,8 +57,8 @@ const Switch = ({task, id, setRenderToDo, renderToDo }) => {
         description: task.description,
         complete: task.complete,
     }
+
     const [newTask, setTask] = useState(updatedTask);
-    console.log(task.complete)
     function handleChange(e){
         e.stopPropagation(); 
         setTask({...newTask, [e.target.name]:e.target.checked})

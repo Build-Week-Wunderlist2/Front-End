@@ -5,8 +5,7 @@ const EditTaskForm = ({taskToEdit, updateTask, editing, setTaskToEdit, setEditin
         {editing && (
             <form onSubmit={updateTask}>
                 <label>
-                    <input onChange={e=>
-                    setTaskToEdit({...taskToEdit, description: e.target.value})}
+                    <input onChange={e => setTaskToEdit({...taskToEdit, description: e.target.value})}
                     value= {taskToEdit.description}
                     />
                 </label>

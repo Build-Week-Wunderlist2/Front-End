@@ -29,21 +29,18 @@ const DisplayList = ({task, id, setRenderToDo, renderToDo}) => {
     let updatedTask = {
         id: id,
         description: task.description,
-        complete: task.complete,
-        repeatsDaily: task.repeatsDaily,
-        repeatsWeekly: task.repeatsWeekly,
-        repeatsMonthly: task.repeatsMonthly,
+        // complete: task.complete,
+        // repeatsDaily: task.repeatsDaily,
+        // repeatsWeekly: task.repeatsWeekly,
+        // repeatsMonthly: task.repeatsMonthly,
      };
 
     const [editing, setEditing] = useState(false);
     const [taskToEdit, setTaskToEdit] = useState(updatedTask);
 
-
     const editTask = tasks => {
         setEditing(!editing);
-        setTaskToEdit(tasks);
     }
-
 
     const updateTask = (e) => {
         e.preventDefault()
@@ -54,7 +51,7 @@ const DisplayList = ({task, id, setRenderToDo, renderToDo}) => {
             setEditing(false);
         })
         .catch(err=> {
-            console.log(taskToEdit)
+            console.log('catch for put', taskToEdit)
             console.error(err.message, err.response)
         })
     }
@@ -76,21 +73,20 @@ const DisplayList = ({task, id, setRenderToDo, renderToDo}) => {
         setTaskToEdit({...task, [e.target.name]:e.target.checked})
         
     }
-    // console.log('my new task', newTask)
     return (
         <>
         <DisplayListContainer complete={task.complete}>
             <DisplayListHeader>{task.description}</DisplayListHeader>
             <Switch task={task} id={id} setRenderToDo={setRenderToDo} renderToDo={renderToDo}/>
         </DisplayListContainer>
-        {(editing === true ? <EditTaskForm editing={editing} setEditing={setEditing} updateTask={updateTask} taskToEdit={taskToEdit} setTaskToEdit={setTaskToEdit} task={task}/> : <h3>{task.description}</h3>
+        {(editing === true ? <EditTaskForm editing={editing} setEditing={setEditing} updateTask={updateTask} taskToEdit={taskToEdit} setTaskToEdit={setTaskToEdit} task={task}/> : undefined
       )}
-        <button button="edit" onClick={()=>editTask(task)} />
-        <button button="delete" onClick={e=>{
+        <button style={{width: '25%'}}button="edit" onClick={()=>editTask(task)}>Edit</button>
+        <button style={{width: '25%'}} button="delete" onClick={e=>{
             e.preventDefault();
             deleteTask(task);
-        }} />
-            <li>{task.repeatsDaily === true ? "This will run daily" : task.repeatsWeekly === true ? "This will run Weekly" : task.repeatsMonthly === true ? "This will run Monthly" : "" }</li>
+        }}>Delete</button>
+            <ol>{task.repeatsDaily === true ? "This will run daily" : task.repeatsWeekly === true ? "This will run Weekly" : task.repeatsMonthly === true ? "This will run Monthly" : undefined }</ol>
         </>            
 
     )
