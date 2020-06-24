@@ -34,7 +34,6 @@ const CardHeader = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 1%;
-
     h2 {
         display: flex;
         align-items: center;
@@ -55,29 +54,19 @@ const CardButton = styled.button`
 `;
 
 const initialToDo = {
-    title: '',
+    title: "",
     complete: false,
 };
-
-const initialTask = {
-    description: '',
-    complete: false,
-    repeatsDaily: false,
-    repeatsWeekly: false,
-    repeatsMonthly: false
-};
-
 
 const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
     const [editing, setEditing] = useState(false);
     const [todoToEdit, setToDoToEdit] = useState(initialToDo);
-    const [taskToEdit, setTaskToEdit] = useState(initialTask);
     const [task, setTask ] = useState(false);
 
   useEffect( () => {
         axiosWithAuth().get(`/user/${id}/task`).then(res => {
             setTask(res.data.sort((a, b) => (a.id > b.id) ? -1 : 1))
-            console.log(res)
+            // console.log(res)
         }).catch(err => {
             console.log(err)
         })
@@ -93,7 +82,6 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
     };
     const saveEdit = e => {
         e.preventDefault();
-        type === 'todo' ? 
         axiosWithAuth()
         .put(`/user/todos/${id}`, todoToEdit)
         .then(res => {
@@ -106,17 +94,10 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
                 err.message,
                 err.response
             );
-        }) : axiosWithAuth()
-        .put(`/user/task/${userID}`, taskToEdit)
-        .then(res => {
-            this.handleReload();
-        })
-        .catch(err => console.error(err.message));
-        
+        }) 
     };
 
         const deleteToDo = () => {
-       type==='todo' ?
          axiosWithAuth()
         .delete(`user/todos/${id}`)
         .then(res => {
@@ -128,18 +109,8 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
                 err.message,
                 err.response
             );
-        }) : axiosWithAuth()
-        .delete(`user/:id/task`)
-        .then(res => {
-            setTaskToEdit(res.data);
+        }); 
 
-            return undefined
-        })
-        .catch(err => { 
-            console.error(
-            err.message
-           );
-        });
     }
         
     return (
