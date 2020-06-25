@@ -5,10 +5,7 @@ import ToDoForm from "./ToDoForm";
 import styled from "styled-components";
 import DisplayCard from "./DisplayCard";
 import { device } from "../Breakpoints";
-import {
-  DarkGold,
-  LightPurple,
-} from "../ColorPalette";
+import { DarkGold, LightPurple } from "../ColorPalette";
 
 const MainContainer = styled.div`
   height: 100vh;
@@ -22,11 +19,11 @@ const SearchInput = styled.input`
   width: 30%;
   margin: 1% auto;
 
-  @media ${device.laptopL}{
+  @media ${device.laptopL} {
     width: 40%;
   }
 
-  @media ${device.laptop}{
+  @media ${device.laptop} {
     width: 75%;
   }
 
@@ -44,7 +41,7 @@ const CardHeading = styled.div`
     font-size: 2.4rem;
     text-shadow: 2px 2px ${DarkGold};
 
-    @media ${device.mobileL}{
+    @media ${device.mobileL} {
       font-size: 2rem;
     }
 
@@ -55,7 +52,7 @@ const CardHeading = styled.div`
   p {
     font-size: 1.5rem;
 
-    @media ${device.mobileL}{
+    @media ${device.mobileL} {
       font-size: 1.3rem;
     }
 
@@ -89,32 +86,6 @@ const ContentAddToDo = styled.button`
     width: 60%;
   }
 `;
-
-const getUserToDo = (id) => {
-  axiosWithAuth()
-    .get(`/user/${id}/todos`)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-const getUserTaskList = (id) => {
-  axiosWithAuth()
-    .get(`/user/33/task`)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-const testing = {
-  description: "hello and hello",
-  task_id: 33,
-};
 
 //this should handle the display
 const Wunderlist = () => {

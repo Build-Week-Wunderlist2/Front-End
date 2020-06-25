@@ -4,7 +4,6 @@ import TaskForm from "./TaskForm";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import {
   DarkGold,
-  LightTan,
   BurntOrange,
   DarkPurple,
   LightPurple,
@@ -26,14 +25,14 @@ const CardContainer = styled.div`
   border-radius: 5px;
 
   @media ${device.laptopL} {
-      width: 45%;
-    }
+    width: 45%;
+  }
 
   @media ${device.tablet} {
     width: 90%;
   }
 
-  @media ${device.mobileM}{
+  @media ${device.mobileM} {
     margin: 2%;
     width: 100%;
   }
@@ -105,7 +104,6 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
     };
   }, [renderToDo]);
 
-
   const editToDo = (cards) => {
     setEditing(!editing);
     setToDoToEdit(cards);
@@ -117,7 +115,6 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
       .then((res) => {
         setRenderToDo(!renderToDo);
         setEditing(false);
-
       })
       .catch((err) => {
         console.error(err.message, err.response);

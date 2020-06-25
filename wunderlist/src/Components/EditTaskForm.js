@@ -17,7 +17,6 @@ const EditLabel = styled.label`
     font-size: 1.1rem;
   }
 `;
-const EditButtons = styled.button``;
 
 const EditTaskForm = ({
   taskToEdit,

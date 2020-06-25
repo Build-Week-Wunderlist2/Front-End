@@ -1,7 +1,18 @@
 import React, { useState } from "react";
-import styled from 'styled-components'
+import styled from "styled-components";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import * as yup from 'yup'
+import * as yup from "yup";
+
+const TaskForms = styled.form`
+  display: flex;
+  justify-content: center;
+  margin: 1%;
+  border-radius: 15px;
+`;
+const TasksSelect = styled.select`
+  background: rgba(125, 125, 125, 0.1);
+  margin: 0 2%;
+`;
 
 const TaskForm = ({ id, renderToDo, setRenderToDo }) => {
   let date = new Date().toLocaleString().split(",")[0];
@@ -49,20 +60,6 @@ const TaskForm = ({ id, renderToDo, setRenderToDo }) => {
     //had a ton of issues with options not passing e.target.name
   };
 
-  const TaskForms = styled.form`
-    display: flex;
-    justify-content: center;
-    margin: 1%;
-    border-radius: 15px;
-  `;
-  const TasksSelect= styled.select`
-     background: rgba(125, 125, 125, .1);
-     margin: 0 2%;
-  `;
-
-  const TasksInput = styled.input`
-  
-  `;
   return (
     <>
       <TaskForms onSubmit={saveTask}>

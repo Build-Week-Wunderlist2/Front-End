@@ -3,13 +3,6 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 import EditTaskForm from "./EditTaskForm";
 import Switch from "./Switch";
 import styled from "styled-components";
-import {
-  DarkGold,
-  LightTan,
-  BurntOrange,
-  DarkPurple,
-  LightPurple,
-} from "../ColorPalette";
 
 const completeBackground = "rgba(64, 86, 161, .3)";
 

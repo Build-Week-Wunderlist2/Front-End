@@ -1,12 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  DarkGold,
-  LightTan,
-  BurntOrange,
-  DarkPurple,
-  LightPurple,
-} from "../ColorPalette";
+import { DarkGold } from "../ColorPalette";
 
 const EditTitle = styled.form`
   display: flex;
