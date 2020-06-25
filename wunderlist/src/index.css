@@ -354,7 +354,7 @@ html {
   background: #EFE2BA;
 }
 
-body, button {
+body, button, input {
       font-family: 'Alegreya', serif;
 }
 
