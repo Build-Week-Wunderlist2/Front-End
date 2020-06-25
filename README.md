@@ -10,8 +10,8 @@ Wunderlist 2.0 takes your traditional to-do list app and automates it. It not on
 
 No matter how much is on your plate, Wunderlist 2.0 makes it super easy to remember all the little recurring to-dos and surprise to-dos that pop up unexpectedly.
    
-## Teammate Contributions
-//Ryan Plante//
+# Teammate Contributions
+## Ryan Plante
 Participated in standup, making sure all needs were vocalized and relayed to the Brandon and Jeremiah, as well as, getting what they needed done from me. Gave some input as to what our site should look like, but otherwise gave Brandon free reign as to how the app should look.
 ### axiosWithAuth
 Simple Authorization setting token to localStorage and adding it in all componenets that required editing, adding, or deleting.
@@ -21,3 +21,6 @@ Added the post request to both Sign-Up and Login, allowing the user access their
 Just used in the App file. Makes sure user as required token to access lists. Otherwise, Routes them back to login.
 ### Task, To Do Form, Edit Task and To Do Form 
 Added post, edit, and delete functions so user can add a task or a to do, using mindful states that made sense for each component.
+
+
+## Brandon Stine
