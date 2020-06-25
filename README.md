@@ -24,3 +24,24 @@ Added post, edit, and delete functions so user can add a task or a to do, using 
 
 
 ## Brandon Stine
+
+## Team Contributions
+    - I participated in the morning and afternoon standup meeting, being vocal about needs.
+    - I co-designed the layout, color palette, and theme for our project.
+    - I completed a portion of the product canvas.
+
+## React
+    - Designed A Single Page Application
+    - Used symantic HTML.
+    - Completed components and state for the Login, Sign-up, Todos, tasks, and edits
+    - Used appropriate React, Router-dom, and other hooks to navigate and render displays.
+
+## Responsiveness
+    - There are breakpoints from 320px - 2560px that can be found in the Breakpoints.js.
+    - Form Errors displayed for invalid inputs
+    
+## Accessibility
+    - Symantic HTML was used
+    - Responsive design in text
+
+
