@@ -79,13 +79,9 @@ const initialToDo = {
 };
 
 const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
-<<<<<<< HEAD
 
    // updates the to do list title. "E" button makes text box appear, replacing the title, and allowing the user to change it
 
-=======
-=======
->>>>>>> 7fbc931087c7fa2e6abea2bc97ab7e0fec8b3661
   const [editing, setEditing] = useState(false);
   const [todoToEdit, setToDoToEdit] = useState(initialToDo);
   const [task, setTask] = useState(false);

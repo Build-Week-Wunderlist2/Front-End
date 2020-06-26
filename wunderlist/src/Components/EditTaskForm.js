@@ -1,12 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-<<<<<<< HEAD
-=======
 
 //makes the text box appear and runs the the updateTask function. cancel button also used to switch the setEditing to false so a user can cancel their decision
 
->>>>>>> 7fbc931087c7fa2e6abea2bc97ab7e0fec8b3661
 const EditTask = styled.form`
   display: flex;
   align-content: center;

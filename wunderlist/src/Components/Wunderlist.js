@@ -87,48 +87,7 @@ const ContentAddToDo = styled.button`
   }
 `;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-// const getUserToDo = (id) => {
-//     axiosWithAuth().get(`/user/${id}/todos`).then(res => {
-//         console.log(res)
-//     }).catch(err => {
-//         console.log(err)
-//     })
-// }
-// const getUserTaskList = (id) => {
-//     axiosWithAuth().get(`/user/33/task`).then(res => {
-//         console.log(res)
-//     }).catch(err => {
-//         console.log(err)
-//     })
-// }
-
-// const testing = {
-//     description: 'hello and hello',
-//     task_id: 33
-// }
-
-// const PostUserTask = (id) => {
-//     axiosWithAuth().post(`/user/task`, testing).then(res => {
-//         console.log(res)
-//     }).catch(err => {
-//         console.log(err)
-//     })
-// }
-
-//this handles how the site looks when a user is logged in
-
-=======
 //this should handle the display
->>>>>>> b1ff60c9c77a64742bb0a4b78fcb9a0df5535946
-=======
-
-//this should handle the display
-
->>>>>>> 7fbc931087c7fa2e6abea2bc97ab7e0fec8b3661
 const Wunderlist = () => {
   const userID = useParams().id;
   const [newButton, setNewButton] = useState(false);
@@ -208,41 +167,4 @@ const Wunderlist = () => {
   );
 };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    const handleSearch = (e) => {
-        setSearch(e.target.value)
-    }
-    return (
-        <MainContainer>
-            <CardHeading>
-                <h1>Welcome to Wunderlist 2.0</h1>
-                <p>Please click on 'Add List' to get started.</p>
-            </CardHeading>
-            <ContentContainer >
-                {(newButton === true
-                ? <ToDoForm setRenderToDo={setRenderToDo} setNewButton={setNewButton} renderToDo={renderToDo} />
-                : <ContentAddToDo onClick={() => setNewButton(!newButton)}>Add List</ContentAddToDo>)}
-            </ContentContainer>
-            <SearchInput  name='Search' placeholder='Search For Task Name' onChange={handleSearch}/>
-            <ContentContainer >
-                {!searchResult
-                ? <p>please hold</p>
-                : searchResult.map(obj => {
-                    return <DisplayCard type='todo' key={obj.id} id={obj.id} card={obj} userID={userID} setRenderToDo={setRenderToDo} renderToDo={renderToDo}/> 
-                })}
-            </ContentContainer>
-
-        </MainContainer>
-    )
-
-}
-
-export default Wunderlist
-=======
 export default Wunderlist;
->>>>>>> b1ff60c9c77a64742bb0a4b78fcb9a0df5535946
-=======
-
-export default Wunderlist;
->>>>>>> 7fbc931087c7fa2e6abea2bc97ab7e0fec8b3661
