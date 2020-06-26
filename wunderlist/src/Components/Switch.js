@@ -48,14 +48,18 @@ const SwitchInput = styled.input`
   }
 `;
 
+//sets the complete boolean to true and false based on the "switch". only id and complete are needed to be
+//passed for it to work.
+
+
 const Switch = ({ task, id, setRenderToDo, renderToDo }) => {
   let updatedTask = {
-    id: id,
-    description: task.description,
+    id: id, 
     complete: task.complete,
   };
 
   const [newTask, setTask] = useState(updatedTask);
+
   function handleChange(e) {
     e.stopPropagation();
     setTask({ ...newTask, [e.target.name]: e.target.checked });
@@ -65,6 +69,7 @@ const Switch = ({ task, id, setRenderToDo, renderToDo }) => {
     axiosWithAuth()
       .put(`/user/task/${id}`, newTask)
       .then((res) => {
+        console.log(res);
         setRenderToDo(!renderToDo);
       })
       .catch((err) => {
