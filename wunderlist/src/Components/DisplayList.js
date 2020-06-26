@@ -1,99 +1,117 @@
+import React, { useState } from "react";
+import axiosWithAuth from "../utils/axiosWithAuth";
+import EditTaskForm from "./EditTaskForm";
+import Switch from "./Switch";
+import styled from "styled-components";
 
-import React, { useState } from 'react';
-import axiosWithAuth from '../utils/axiosWithAuth'
-import EditTaskForm from './EditTaskForm';
-import Switch from './Switch';
-import styled from 'styled-components';
-import {DarkGold, LightTan, BurntOrange, DarkPurple, LightPurple} from '../ColorPalette'
-
-
-const completeBackground = 'rgba(64, 86, 161, .3)';
+const completeBackground = "rgba(64, 86, 161, .3)";
 
 const DisplayListContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: ${({complete}) => complete ? completeBackground : undefined};
-    margin: 1%;
-    border-radius: 15px;
-    max-height: 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: ${({ complete }) =>
+    complete ? completeBackground : undefined};
+  margin: 1%;
+  border-radius: 15px;
+  max-height: 2em;
+
+  p {
+    width: 100%;
+  }
+`;
+
+const DisplayHeaderContainer = styled.div`
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const DisplayListHeader = styled.h3`
-    margin-left: 1%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 1%;
 `;
 
+const DisplayList = ({ task, id, setRenderToDo, renderToDo }) => {
+  let updatedTask = {
+    id: id,
+    description: task.description,
+  };
 
-const DisplayList = ({task, id, setRenderToDo, renderToDo}) => {
+  const [editing, setEditing] = useState(false);
+  const [taskToEdit, setTaskToEdit] = useState(updatedTask);
 
-    let updatedTask = {
-        id: id,
-        description: task.description,
-     };
+  const editTask = () => {
+    setEditing(!editing);
+  };
 
-    const [editing, setEditing] = useState(false);
-    const [taskToEdit, setTaskToEdit] = useState(updatedTask);
+  const updateTask = (e) => {
+    e.preventDefault();
+    axiosWithAuth()
+      .put(`/user/task/${id}`, taskToEdit)
+      .then((res) => {
+        setRenderToDo(!renderToDo);
+        setEditing(false);
+      })
+      .catch((err) => {
+        console.log("catch for put", taskToEdit);
+        console.error(err.message, err.response);
+      });
+  };
 
+  const deleteTask = () => {
+    axiosWithAuth()
+      .delete(`/user/task/${id}`)
+      .then((res) => {
+        setTaskToEdit(res.data);
+        setRenderToDo(!renderToDo);
+      })
+      .catch((err) => {
+        console.error(err.message, err.response);
+      });
+  };
 
-    const editTask = tasks => {
-        setEditing(!editing);
-    }
+  const taskRepeat =
+    task.repeatsDaily === true
+      ? "Daily"
+      : task.repeatsWeekly === true
+      ? "Weekly"
+      : task.repeatsMonthly === true
+      ? "Monthly"
+      : undefined;
+  return (
+    <>
+      <DisplayListContainer complete={task.complete}>
+        <DisplayHeaderContainer>
+          {editing === true ? (
+            <EditTaskForm
+              deleteTask={deleteTask}
+              editing={editing}
+              setEditing={setEditing}
+              updateTask={updateTask}
+              taskToEdit={taskToEdit}
+              setTaskToEdit={setTaskToEdit}
+              task={task}
+            />
+          ) : (
+            <DisplayListHeader onClick={() => editTask()}>
+              {task.description}
+            </DisplayListHeader>
+          )}
+          <p>{taskRepeat}</p>
+        </DisplayHeaderContainer>
+        <Switch
+          task={task}
+          id={id}
+          setRenderToDo={setRenderToDo}
+          renderToDo={renderToDo}
+        />
+      </DisplayListContainer>
+    </>
+  );
+};
 
-    //allows user to update the task name. when user clicks on their task title, editTask gets run and box appears with previous name
+export default DisplayList;
 
-    const updateTask = e => {
-        e.preventDefault()
-        axiosWithAuth()
-        .put(`/user/task/${id}`, taskToEdit)
-        .then(res => {
-            setRenderToDo(!renderToDo);
-            setEditing(false);
-        })
-        .catch(err=> {
-            // console.log(taskToEdit)
-            console.error(err.message, err.response)
-        })
-    }
-
-    //similar to the updateTask. When the user clicks on the title, an option appears that allows them to delete the task name if they so desire
-
-    const deleteTask = () => {
-        axiosWithAuth()
-        .delete(`/user/task/${id}`)
-        .then(res=>{
-            setTaskToEdit(res.data);
-            setRenderToDo(!renderToDo)
-        })
-        .catch(err=>{console.error(
-            err.message,err.response
-        )})
-    }
-
-    function handleChange(e){
-        e.stopPropagation(); 
-        setTaskToEdit({...task, [e.target.name]:e.target.checked})
-        
-    }
-    // console.log('my new task', newTask)
-    return (
-        <>
-
-       {/* displays the tasks inside the display card. switch is also added to mark a task as complete and highlights and darkens the task */}
-
-        <DisplayListContainer complete={task.complete}>
-            <DisplayListHeader>{task.description}</DisplayListHeader>
-            {(editing === true ? <EditTaskForm editing={editing} setEditing={setEditing} updateTask={updateTask} taskToEdit={taskToEdit} setTaskToEdit={setTaskToEdit} task={task}/> : undefined)}
-            <Switch task={task} id={id} setRenderToDo={setRenderToDo} renderToDo={renderToDo}/>
-        </DisplayListContainer>
-        <button button="edit" onClick={()=>editTask(task)} />
-        <button button="delete" onClick={e=>{
-            e.preventDefault();
-            deleteTask(task);
-        }} />
-            <li>{task.repeatsDaily === true ? "This will run daily" : task.repeatsWeekly === true ? "This will run Weekly" : task.repeatsMonthly === true ? "This will run Monthly" : "" }</li>
-        </>            
-
-    )
-}
-
-export default DisplayList
