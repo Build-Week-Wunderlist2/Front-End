@@ -23,20 +23,16 @@ const CardContainer = styled.div`
   background: ${LightPurple};
   box-shadow: 2px 2px 3px 3px ${DarkPurple};
   border-radius: 5px;
-
   @media ${device.laptopL} {
     width: 45%;
   }
-
   @media ${device.tablet} {
     width: 90%;
   }
-
   @media ${device.mobileM} {
     margin: 2%;
     width: 100%;
   }
-
   p {
     display: flex;
     align-items: center;
@@ -44,7 +40,6 @@ const CardContainer = styled.div`
     width: 20%;
     padding: 1%;
     margin: 1%;
-
     @media ${device.laptop} {
       width: 25%;
       font-size: 1rem;
@@ -82,6 +77,9 @@ const initialToDo = {
   title: "",
   complete: false,
 };
+
+//displays all to do lists. lets user edit the to do name by clicking on the "E" to the left of task name
+//delete functions by clicking the red x. removes it completely from the server"
 
 const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
   const [editing, setEditing] = useState(false);

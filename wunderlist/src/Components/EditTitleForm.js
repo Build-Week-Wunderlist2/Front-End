@@ -15,6 +15,9 @@ const EditTitle = styled.form`
   }
 `;
 
+
+//makes the text box appear and runs the the saveEdit (updateToDo) function. cancel button also used to switch the setEditing to false so a user can cancel their decision
+
 const EditTitleForm = ({
   todoToEdit,
   saveEdit,

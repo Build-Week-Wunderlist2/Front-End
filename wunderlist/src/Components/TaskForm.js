@@ -36,8 +36,11 @@ const TaskForm = ({ id, renderToDo, setRenderToDo }) => {
     created_at: date,
   };
 
+    //allows user to add a new task. an option can be chosen to decide if the task wants to be run daily, weekly or, monthly
+
   const [addTask, setAddTask] = useState(initialTask);
   const [errors, setErrors] = useState("");
+
 
   const formSchema = yup.object().shape({
     description: yup.string().required("Include Title"),
