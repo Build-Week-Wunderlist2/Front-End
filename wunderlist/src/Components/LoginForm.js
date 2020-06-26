@@ -97,13 +97,7 @@ const formInitial = {
   username: "",
   password: "",
 };
-
-<<<<<<< HEAD
-=======
-
 // both Login and Signup Form. used tertiary if else to make one form work for all. allows multiple users to sign up and login in and pushes user to their list
-
->>>>>>> 7fbc931087c7fa2e6abea2bc97ab7e0fec8b3661
 const LoginForm = ({ type }) => {
   const [formData, setFormData] = useState(formInitial);
   const [errors, setErrors] = useState(formInitial);
@@ -117,10 +111,6 @@ const LoginForm = ({ type }) => {
       })
       .catch((err) => {
         //
-<<<<<<< HEAD
-=======
-
->>>>>>> 7fbc931087c7fa2e6abea2bc97ab7e0fec8b3661
       });
   }, [formData]);
 
