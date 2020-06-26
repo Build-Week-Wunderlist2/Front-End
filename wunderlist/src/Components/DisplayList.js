@@ -114,7 +114,3 @@ const DisplayList = ({ task, id, setRenderToDo, renderToDo }) => {
 };
 
 export default DisplayList;
-<<<<<<< HEAD
-=======
-
->>>>>>> 7fbc931087c7fa2e6abea2bc97ab7e0fec8b3661
