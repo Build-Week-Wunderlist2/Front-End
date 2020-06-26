@@ -88,6 +88,7 @@ const ContentAddToDo = styled.button`
 `;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 // const getUserToDo = (id) => {
@@ -123,6 +124,11 @@ const ContentAddToDo = styled.button`
 =======
 //this should handle the display
 >>>>>>> b1ff60c9c77a64742bb0a4b78fcb9a0df5535946
+=======
+
+//this should handle the display
+
+>>>>>>> 7fbc931087c7fa2e6abea2bc97ab7e0fec8b3661
 const Wunderlist = () => {
   const userID = useParams().id;
   const [newButton, setNewButton] = useState(false);
@@ -203,6 +209,7 @@ const Wunderlist = () => {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     const handleSearch = (e) => {
         setSearch(e.target.value)
     }
@@ -235,3 +242,7 @@ export default Wunderlist
 =======
 export default Wunderlist;
 >>>>>>> b1ff60c9c77a64742bb0a4b78fcb9a0df5535946
+=======
+
+export default Wunderlist;
+>>>>>>> 7fbc931087c7fa2e6abea2bc97ab7e0fec8b3661

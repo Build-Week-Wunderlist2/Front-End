@@ -56,18 +56,28 @@ const ToDoForm = ({ setNewButton, renderToDo, setRenderToDo }) => {
   });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     //allows user to add a new todo. title is needed in order for a user to add a new todo list 
     
     const saveToDo = e => {
         e.preventDefault();
 =======
+=======
+
+
+    //allows user to add a new todo. title is needed in order for a user to add a new todo list 
+
+>>>>>>> 7fbc931087c7fa2e6abea2bc97ab7e0fec8b3661
   const saveToDo = (e) => {
     e.preventDefault();
     formSchema
       .validate(addToDo)
       .then(() => {
+<<<<<<< HEAD
 >>>>>>> b1ff60c9c77a64742bb0a4b78fcb9a0df5535946
+=======
+>>>>>>> 7fbc931087c7fa2e6abea2bc97ab7e0fec8b3661
         axiosWithAuth()
           .post("/user/todos", addToDo)
           .then((res) => {

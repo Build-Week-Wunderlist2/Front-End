@@ -23,20 +23,16 @@ const CardContainer = styled.div`
   background: ${LightPurple};
   box-shadow: 2px 2px 3px 3px ${DarkPurple};
   border-radius: 5px;
-
   @media ${device.laptopL} {
     width: 45%;
   }
-
   @media ${device.tablet} {
     width: 90%;
   }
-
   @media ${device.mobileM} {
     margin: 2%;
     width: 100%;
   }
-
   p {
     display: flex;
     align-items: center;
@@ -44,7 +40,6 @@ const CardContainer = styled.div`
     width: 20%;
     padding: 1%;
     margin: 1%;
-
     @media ${device.laptop} {
       width: 25%;
       font-size: 1rem;
@@ -84,10 +79,13 @@ const initialToDo = {
 };
 
 const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
+<<<<<<< HEAD
 
    // updates the to do list title. "E" button makes text box appear, replacing the title, and allowing the user to change it
 
 =======
+=======
+>>>>>>> 7fbc931087c7fa2e6abea2bc97ab7e0fec8b3661
   const [editing, setEditing] = useState(false);
   const [todoToEdit, setToDoToEdit] = useState(initialToDo);
   const [task, setTask] = useState(false);
@@ -105,7 +103,10 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
       });
     return () => {
       return undefined;
+<<<<<<< HEAD
 >>>>>>> b1ff60c9c77a64742bb0a4b78fcb9a0df5535946
+=======
+>>>>>>> 7fbc931087c7fa2e6abea2bc97ab7e0fec8b3661
     };
   }, [renderToDo]);
 
@@ -126,6 +127,7 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
       });
   };
 
+<<<<<<< HEAD
 
     //deletes the whole to do list. "X" runs the deleteToDO removing it from the server. Tried to figure out to "delete" the to do w/o doing it. 
 
@@ -142,6 +144,20 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
                 err.response
             );
         }); 
+=======
+  const deleteToDo = () => {
+    axiosWithAuth()
+      .delete(`user/todos/${id}`)
+      .then((res) => {
+        setToDoToEdit(res.data);
+        setRenderToDo(!renderToDo);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err.message, err.response);
+      });
+  };
+>>>>>>> 7fbc931087c7fa2e6abea2bc97ab7e0fec8b3661
 
   return (
     <CardContainer>
