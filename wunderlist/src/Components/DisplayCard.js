@@ -99,10 +99,6 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
       });
     return () => {
       return undefined;
-<<<<<<< HEAD
->>>>>>> b1ff60c9c77a64742bb0a4b78fcb9a0df5535946
-=======
->>>>>>> 7fbc931087c7fa2e6abea2bc97ab7e0fec8b3661
     };
   }, [renderToDo]);
 
