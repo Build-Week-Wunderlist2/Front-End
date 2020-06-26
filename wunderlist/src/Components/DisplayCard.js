@@ -78,6 +78,9 @@ const initialToDo = {
   complete: false,
 };
 
+//displays all to do lists. lets user edit the to do name by clicking on the "E" to the left of task name
+//delete functions by clicking the red x. removes it completely from the server"
+
 const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
   const [editing, setEditing] = useState(false);
   const [todoToEdit, setToDoToEdit] = useState(initialToDo);

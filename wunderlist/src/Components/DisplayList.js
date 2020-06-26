@@ -47,6 +47,10 @@ const DisplayList = ({ task, id, setRenderToDo, renderToDo }) => {
     setEditing(!editing);
   };
 
+  //displays all the tasks in the to do list and also includes the option to update the task name by clicking the task itself.
+  //also has the delete button appear only when the task name is clicked so user doesn't accidentally delete their task
+  //lets user decide if they want the task to fire every day, week, or month.
+
   const updateTask = (e) => {
     e.preventDefault();
     axiosWithAuth()
