@@ -1,5 +1,8 @@
 import React from 'react';
 
+
+//makes the text box appear and runs the the updateTask function. cancel button also used to switch the setEditing to false so a user can cancel their decision
+
 const EditTaskForm = ({taskToEdit, updateTask, editing, setTaskToEdit, setEditing}) => {
     return (<>
         {editing && (

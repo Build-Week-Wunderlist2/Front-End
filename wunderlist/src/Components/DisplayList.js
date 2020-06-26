@@ -29,10 +29,6 @@ const DisplayList = ({task, id, setRenderToDo, renderToDo}) => {
     let updatedTask = {
         id: id,
         description: task.description,
-        complete: task.complete,
-        repeatsDaily: task.repeatsDaily,
-        repeatsWeekly: task.repeatsWeekly,
-        repeatsMonthly: task.repeatsMonthly,
      };
 
     const [editing, setEditing] = useState(false);
@@ -41,11 +37,11 @@ const DisplayList = ({task, id, setRenderToDo, renderToDo}) => {
 
     const editTask = tasks => {
         setEditing(!editing);
-        setTaskToEdit(tasks);
     }
 
+    //allows user to update the task name. when user clicks on their task title, editTask gets run and box appears with previous name
 
-    const updateTask = (e) => {
+    const updateTask = e => {
         e.preventDefault()
         axiosWithAuth()
         .put(`/user/task/${id}`, taskToEdit)
@@ -54,10 +50,12 @@ const DisplayList = ({task, id, setRenderToDo, renderToDo}) => {
             setEditing(false);
         })
         .catch(err=> {
-            console.log(taskToEdit)
+            // console.log(taskToEdit)
             console.error(err.message, err.response)
         })
     }
+
+    //similar to the updateTask. When the user clicks on the title, an option appears that allows them to delete the task name if they so desire
 
     const deleteTask = () => {
         axiosWithAuth()
@@ -79,12 +77,14 @@ const DisplayList = ({task, id, setRenderToDo, renderToDo}) => {
     // console.log('my new task', newTask)
     return (
         <>
+
+       {/* displays the tasks inside the display card. switch is also added to mark a task as complete and highlights and darkens the task */}
+
         <DisplayListContainer complete={task.complete}>
             <DisplayListHeader>{task.description}</DisplayListHeader>
+            {(editing === true ? <EditTaskForm editing={editing} setEditing={setEditing} updateTask={updateTask} taskToEdit={taskToEdit} setTaskToEdit={setTaskToEdit} task={task}/> : undefined)}
             <Switch task={task} id={id} setRenderToDo={setRenderToDo} renderToDo={renderToDo}/>
         </DisplayListContainer>
-        {(editing === true ? <EditTaskForm editing={editing} setEditing={setEditing} updateTask={updateTask} taskToEdit={taskToEdit} setTaskToEdit={setTaskToEdit} task={task}/> : <h3>{task.description}</h3>
-      )}
         <button button="edit" onClick={()=>editTask(task)} />
         <button button="delete" onClick={e=>{
             e.preventDefault();

@@ -66,7 +66,7 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
   useEffect( () => {
         axiosWithAuth().get(`/user/${id}/task`).then(res => {
             setTask(res.data.sort((a, b) => (a.id > b.id) ? -1 : 1))
-            console.log(res)
+            // console.log(res)
         }).catch(err => {
             console.log(err)
         })
@@ -80,6 +80,9 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
        setEditing(!editing);
        setToDoToEdit(cards);
     };
+
+    // updates the to do list title. "E" button makes text box appear, replacing the title, and allowing the user to change it
+
     const saveEdit = e => {
         e.preventDefault();
         axiosWithAuth()
@@ -97,13 +100,15 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
         }) 
     };
 
+    //deletes the whole to do list. "X" runs the deleteToDO removing it from the server. Tried to figure out to "delete" the to do w/o doing it. 
+
         const deleteToDo = () => {
          axiosWithAuth()
         .delete(`user/todos/${id}`)
         .then(res => {
         setToDoToEdit(res.data);
         setRenderToDo(!renderToDo)
-        console.log(res)
+        // console.log(res)
         })
         .catch(err => { console.error(   
                 err.message,

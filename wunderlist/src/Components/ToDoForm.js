@@ -29,6 +29,9 @@ const ToDoForm = ({setNewButton, renderToDo, setRenderToDo}) => {
     
     const [addToDo, setAddToDo] = useState(initialToDo);
 
+
+    //allows user to add a new todo. title is needed in order for a user to add a new todo list 
+    
     const saveToDo = e => {
         e.preventDefault();
         axiosWithAuth()

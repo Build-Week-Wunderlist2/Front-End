@@ -17,15 +17,17 @@ const TaskForm = ({ id, renderToDo, setRenderToDo }) => {
 
     const [addTask, setAddTask] = useState(initialTask);
 
+    //allows user to add a new task. an option can be chosen to decide if the task wants to be run daily, weekly or, monthly
+
     const saveTask = e => {
      e.preventDefault()
      axiosWithAuth()
         .post('/user/task', addTask)
         .then(res => {
-            console.log('taskform addtask', addTask);
+            // console.log('taskform addtask', addTask);
             setRenderToDo(!renderToDo)
             setAddTask(initialTask)
-            console.log('my add task', addTask)
+            // console.log('my add task', addTask)
         })
         .catch(err => console.error(err.message, err.response))
 

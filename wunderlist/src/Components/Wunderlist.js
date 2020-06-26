@@ -52,34 +52,36 @@ const ContentAddToDo = styled.button`
 
 
 
-const getUserToDo = (id) => {
-    axiosWithAuth().get(`/user/${id}/todos`).then(res => {
-        console.log(res)
-    }).catch(err => {
-        console.log(err)
-    })
-}
-const getUserTaskList = (id) => {
-    axiosWithAuth().get(`/user/33/task`).then(res => {
-        console.log(res)
-    }).catch(err => {
-        console.log(err)
-    })
-}
+// const getUserToDo = (id) => {
+//     axiosWithAuth().get(`/user/${id}/todos`).then(res => {
+//         console.log(res)
+//     }).catch(err => {
+//         console.log(err)
+//     })
+// }
+// const getUserTaskList = (id) => {
+//     axiosWithAuth().get(`/user/33/task`).then(res => {
+//         console.log(res)
+//     }).catch(err => {
+//         console.log(err)
+//     })
+// }
 
-const testing = {
-    description: 'hello and hello',
-    task_id: 33
-}
+// const testing = {
+//     description: 'hello and hello',
+//     task_id: 33
+// }
 
-const PostUserTask = (id) => {
-    axiosWithAuth().post(`/user/task`, testing).then(res => {
-        console.log(res)
-    }).catch(err => {
-        console.log(err)
-    })
-}
-//this should handle the display
+// const PostUserTask = (id) => {
+//     axiosWithAuth().post(`/user/task`, testing).then(res => {
+//         console.log(res)
+//     }).catch(err => {
+//         console.log(err)
+//     })
+// }
+
+//this handles how the site looks when a user is logged in
+
 const Wunderlist = () => {
     const userID = useParams().id;
     const [newButton, setNewButton] = useState(false);
@@ -111,9 +113,6 @@ const Wunderlist = () => {
     }
     return (
         <MainContainer>
-            {/* <button style={{width: '25%', height: '4.5vh', fontSize: '1.5rem'}} onClick={() => {getUserToDo(userID)}}>test for get todos list</button>
-            <button style={{width: '25%', height: '4.5vh', fontSize: '1.5rem'}} onClick={() => {getUserTaskList(userID)}}>test for get task list</button> */}
-
             <CardHeading>
                 <h1>Welcome to Wunderlist 2.0</h1>
                 <p>Please click on 'Add List' to get started.</p>
