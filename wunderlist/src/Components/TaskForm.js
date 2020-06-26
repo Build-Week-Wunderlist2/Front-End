@@ -54,7 +54,7 @@ const TaskForm = ({ id, renderToDo, setRenderToDo }) => {
         axiosWithAuth()
           .post("/user/task", addTask)
           .then((res) => {
-            console.log("taskform addtask", addTask);
+            // console.log("taskform addtask", addTask);
             setRenderToDo(!renderToDo);
             setAddTask(initialTask);
             setErrors("");
