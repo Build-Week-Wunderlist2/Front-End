@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import axiosWithAuth from '../utils/axiosWithAuth';
+import axiosWithAuth from "../utils/axiosWithAuth";
 
 const SwitchWrapper = styled.div`
   position: relative;
@@ -33,6 +33,7 @@ const SwitchInput = styled.input`
   border-radius: 15px;
   width: 42px;
   height: 26px;
+  cursor: pointer;
   &:checked + ${SwitchLabel} {
     background: #4fbe79;
     &::after {
@@ -47,52 +48,51 @@ const SwitchInput = styled.input`
   }
 `;
 
+const Switch = ({ task, id, setRenderToDo, renderToDo }) => {
+  let updatedTask = {
+    id: id,
+    description: task.description,
+    complete: task.complete,
+  };
 
+  const [newTask, setTask] = useState(updatedTask);
+  function handleChange(e) {
+    e.stopPropagation();
+    setTask({ ...newTask, [e.target.name]: e.target.checked });
+  }
 
+  const updateTask = () => {
+    axiosWithAuth()
+      .put(`/user/task/${id}`, newTask)
+      .then((res) => {
+        setRenderToDo(!renderToDo);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-const Switch = ({task, id, setRenderToDo, renderToDo }) => {
+  useEffect(() => {
+    updateTask();
 
-    let updatedTask = {
-        id: id,
-        description: task.description,
-        complete: task.complete,
-    }
-    const [newTask, setTask] = useState(updatedTask);
-    // console.log(task.complete)
-    function handleChange(e){
-        e.stopPropagation(); 
-        setTask({...newTask, [e.target.name]:e.target.checked})
-    }
-    
-    const updateTask = () => {
-        axiosWithAuth()
-        .put(`/user/task/${id}`, newTask)
-        .then(res => {
-            setRenderToDo(!renderToDo)
-        })
-        .catch(err=> {
-            console.log(err)
-        })
-    }
-    
+    return undefined;
+  }, [newTask]);
 
-    useEffect(()=> {
-        updateTask()
-    
-        return undefined
-    }, [newTask])
-    
-    return (
-        <div style={{display: 'flex'}}>
-            {/* <div>Complete</div> */}
-          <SwitchWrapper>
-            <SwitchInput onChange={handleChange} id={id} name='complete' type="checkbox" checked={task.complete} />
-            <SwitchLabel htmlFor={id}/>
-          </SwitchWrapper>
-        </div>
-      )
-    }
+  return (
+    <div style={{ display: "flex" }}>
+      {/* <div>Complete</div> */}
+      <SwitchWrapper>
+        <SwitchInput
+          onChange={handleChange}
+          id={id}
+          name="complete"
+          type="checkbox"
+          checked={task.complete}
+        />
+        <SwitchLabel htmlFor={id} />
+      </SwitchWrapper>
+    </div>
+  );
+};
 
-export default Switch
-
-
+export default Switch;
