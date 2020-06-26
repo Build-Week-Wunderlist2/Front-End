@@ -79,9 +79,6 @@ const initialToDo = {
 };
 
 const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
-
-   // updates the to do list title. "E" button makes text box appear, replacing the title, and allowing the user to change it
-
   const [editing, setEditing] = useState(false);
   const [todoToEdit, setToDoToEdit] = useState(initialToDo);
   const [task, setTask] = useState(false);
@@ -119,22 +116,18 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
       });
   };
 
-
-    //deletes the whole to do list. "X" runs the deleteToDO removing it from the server. Tried to figure out to "delete" the to do w/o doing it. 
-
-        const deleteToDo = () => {
-         axiosWithAuth()
-        .delete(`user/todos/${id}`)
-        .then(res => {
+  const deleteToDo = () => {
+    axiosWithAuth()
+      .delete(`user/todos/${id}`)
+      .then((res) => {
         setToDoToEdit(res.data);
-        setRenderToDo(!renderToDo)
-        // console.log(res)
-        })
-        .catch(err => { console.error(   
-                err.message,
-                err.response
-            );
-        }); 
+        setRenderToDo(!renderToDo);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err.message, err.response);
+      });
+  };
 
   return (
     <CardContainer>
