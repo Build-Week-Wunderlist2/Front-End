@@ -119,7 +119,6 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
       });
   };
 
-<<<<<<< HEAD
 
     //deletes the whole to do list. "X" runs the deleteToDO removing it from the server. Tried to figure out to "delete" the to do w/o doing it. 
 
@@ -136,20 +135,6 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
                 err.response
             );
         }); 
-=======
-  const deleteToDo = () => {
-    axiosWithAuth()
-      .delete(`user/todos/${id}`)
-      .then((res) => {
-        setToDoToEdit(res.data);
-        setRenderToDo(!renderToDo);
-        console.log(res);
-      })
-      .catch((err) => {
-        console.error(err.message, err.response);
-      });
-  };
->>>>>>> 7fbc931087c7fa2e6abea2bc97ab7e0fec8b3661
 
   return (
     <CardContainer>
