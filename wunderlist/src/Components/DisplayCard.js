@@ -121,6 +121,21 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
       });
   };
 
+   const deleteToDo = () => {
+         axiosWithAuth()
+        .delete(`user/todos/${id}`)
+        .then(res => {
+        setToDoToEdit(res.data);
+        setRenderToDo(!renderToDo)
+        // console.log(res)
+        })
+        .catch(err => { console.error(   
+                err.message,
+                err.response
+            );
+        });
+  
+  
   return (
     <CardContainer>
       <CardHeader>
