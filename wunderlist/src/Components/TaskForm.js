@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import * as yup from "yup";
+
+import {ToDoContext} from "../contexts/ToDoContext";
 
 const TaskForms = styled.form`
   display: flex;
@@ -22,7 +24,10 @@ const TasksSelect = styled.select`
   margin: 0 2%;
 `;
 
-const TaskForm = ({ id, renderToDo, setRenderToDo }) => {
+const TaskForm = ({ id }) => {
+
+  const {renderToDo, setRenderToDo} = useContext(ToDoContext);
+
   let date = new Date().toLocaleString().split(",")[0];
   const placeHolder = "Name of Task";
 
