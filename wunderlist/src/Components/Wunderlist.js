@@ -7,6 +7,8 @@ import DisplayCard from "./DisplayCard";
 import { device } from "../Breakpoints";
 import { DarkGold, LightPurple } from "../ColorPalette";
 
+import {ToDoContext} from "../contexts/ToDoContext";
+
 const MainContainer = styled.div`
   height: 100vh;
   width: 100vw;
@@ -90,11 +92,17 @@ const ContentAddToDo = styled.button`
 //this should handle the display
 const Wunderlist = () => {
   const userID = useParams().id;
-  const [newButton, setNewButton] = useState(false);
+  const [newButton, setNewButton] = useState(null);
   const [toDoList, setToDoList] = useState();
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState();
-  const [renderToDo, setRenderToDo] = useState(false);
+  const [renderToDo, setRenderToDo] = useState(null);
+
+
+  useEffect(()=>{
+    setNewButton(false);
+    setRenderToDo(false);
+  },[]);
 
   useEffect(() => {
     axiosWithAuth()
@@ -121,6 +129,7 @@ const Wunderlist = () => {
     setSearch(e.target.value);
   };
   return (
+  <ToDoContext.Provider value ={{setRenderToDo, setNewButton, renderToDo, newButton}}>
     <MainContainer>
       <CardHeading>
         <h1>Welcome to Wunderlist 2.0</h1>
@@ -128,11 +137,7 @@ const Wunderlist = () => {
       </CardHeading>
       <ContentContainer>
         {newButton === true ? (
-          <ToDoForm
-            setRenderToDo={setRenderToDo}
-            setNewButton={setNewButton}
-            renderToDo={renderToDo}
-          />
+          <ToDoForm />
         ) : (
           <ContentAddToDo onClick={() => setNewButton(!newButton)}>
             Add List
@@ -156,14 +161,13 @@ const Wunderlist = () => {
                 id={obj.id}
                 card={obj}
                 userID={userID}
-                setRenderToDo={setRenderToDo}
-                renderToDo={renderToDo}
-              />
+               />
             );
           })
         )}
       </ContentContainer>
     </MainContainer>
+    </ToDoContext.Provider>
   );
 };
 

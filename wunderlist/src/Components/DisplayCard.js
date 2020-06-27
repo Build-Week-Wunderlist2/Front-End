@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import TaskForm from "./TaskForm";
 import axiosWithAuth from "../utils/axiosWithAuth";
@@ -11,6 +11,7 @@ import {
 import EditTitleForm from "./EditTitleForm";
 import DisplayList from "./DisplayList";
 import { device } from "../Breakpoints";
+import {ToDoContext} from "../contexts/ToDoContext";
 
 const CardContainer = styled.div`
   display: flex;
@@ -81,10 +82,12 @@ const initialToDo = {
 //displays all to do lists. lets user edit the to do name by clicking on the "E" to the left of task name
 //delete functions by clicking the red x. removes it completely from the server"
 
-const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
+const DisplayCard = ({ card, type, userID, id}) => {
   const [editing, setEditing] = useState(false);
   const [todoToEdit, setToDoToEdit] = useState(initialToDo);
   const [task, setTask] = useState(false);
+
+  const {setRenderToDo, renderToDo} = useContext(ToDoContext);
 
   useEffect(() => {
     axiosWithAuth()
@@ -168,17 +171,13 @@ const DisplayCard = ({ card, type, userID, id, renderToDo, setRenderToDo }) => {
               key={obj.id}
               task={obj}
               id={obj.id}
-              renderToDo={renderToDo}
-              setRenderToDo={setRenderToDo}
-            />
+           />
           );
         })
       )}
       <TaskForm
         id={id}
-        renderToDo={renderToDo}
-        setRenderToDo={setRenderToDo}
-        userID={userID}
+         userID={userID}
       />
     </CardContainer>
   );

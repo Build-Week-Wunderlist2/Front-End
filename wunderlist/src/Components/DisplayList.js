@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import EditTaskForm from "./EditTaskForm";
 import Switch from "./Switch";
 import styled from "styled-components";
+
+import {ToDoContext} from "../contexts/ToDoContext";
 
 const completeBackground = "rgba(64, 86, 161, .3)";
 
@@ -34,10 +36,13 @@ const DisplayListHeader = styled.h3`
   margin: 0 0 0 1%;
 `;
 
-const DisplayList = ({ task, id, setRenderToDo, renderToDo }) => {
+const DisplayList = ({ task, id }) => {
+
+  const {setRenderToDo, renderToDo} = useContext(ToDoContext);
+
   let updatedTask = {
     id: id,
-    description: task.description,
+    description: task.description
   };
 
   const [editing, setEditing] = useState(false);

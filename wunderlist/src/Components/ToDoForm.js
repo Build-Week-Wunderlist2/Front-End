@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import styled from "styled-components";
 import { device } from "../Breakpoints";
 import * as yup from "yup";
+import {ToDoContext} from "../contexts/ToDoContext";
 
 const ToDoFullForm = styled.form`
   width: 40%;
@@ -38,7 +39,9 @@ const ToDoFormButton = styled.button`
   width: 20%;
 `;
 
-const ToDoForm = ({ setNewButton, renderToDo, setRenderToDo }) => {
+const ToDoForm = () => {
+  const {setRenderToDo, setNewButton, renderToDo, newButton} = useContext(ToDoContext);
+
   let date = new Date().toLocaleString().split(",")[0];
   let userID = useParams().id;
   const initialToDo = {
@@ -64,7 +67,7 @@ const ToDoForm = ({ setNewButton, renderToDo, setRenderToDo }) => {
           .post("/user/todos", addToDo)
           .then((res) => {
             setRenderToDo(!renderToDo);
-            setNewButton(false);
+            setNewButton(!newButton);
             setErrors("");
           })
           .catch((err) => console.log("error: ", err));
